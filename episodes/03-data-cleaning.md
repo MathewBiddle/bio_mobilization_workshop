@@ -69,6 +69,59 @@ your package of choice to translate the dates.
 
 Below are a few examples in R and Python for converting commonly represented dates to ISO-8601.
 
+1. `01/31/2021 17:00 GMT`
+
+::::::::::::::::::::: group-tab
+
+### Python
+
+```python
+import pandas as pd
+df = pd.DataFrame({'date':['01/31/2021 17:00 GMT']})
+df['eventDate'] = pd.to_datetime(df['date'], format="%m/%d/%Y %H:%M %Z")
+df
+```
+```output
+                    date                 eventDate
+    01/31/2021 17:00 GMT 2021-01-31 17:00:00+00:00
+``` 
+
+### R
+
+```r
+library(lubridate)
+date_str <- '01/31/2021 17:00 GMT'
+date <- lubridate::mdy_hm(date_str,tz="UTC")
+date <- lubridate::format_ISO8601(date) # Separates date and time with a T.
+date <- paste0(date, "Z") # Add a Z because time is in UTC.
+date
+```
+```output
+[1] "2021-01-31T17:00:00Z"
+```
+
+:::::::::::::::::::::::::::::::
+
+2. `31/01/2021 12:00 EST`
+
+::::::::::::::::::::: group-tab
+
+### Python
+
+4
+
+### R
+
+5
+
+:::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::
+
+
+
+
+
 ::::::::::::::::: tab
 
 ### Python
