@@ -358,97 +358,101 @@ Below are a few example tools that can be used to match scientific names to WoRM
 
 ### Taxon Match Tool
 
-1. Create a CSV (comma separated value) file with the scientific name of the species of interest. Here we are showing some of the contents of the file [`species.csv`](data/species.csv).
+Create a CSV (comma separated value) file with the scientific name of the species of interest. Here we are showing some of the contents of the file [`species.csv`](data/species.csv).
 
-   ![screenshot](fig/species_file_screenshot.png)
+![screenshot](fig/species_file_screenshot.png)
 
-2. Upload that file to the [WoRMS Taxon match service](https://www.marinespecies.org/aphia.php?p=match)
+Upload that file to the [WoRMS Taxon match service](https://www.marinespecies.org/aphia.php?p=match)
    * **make sure the option LSID is checked**
    * **for the example file, make sure you select LineFeed as the row delimiter and Tab as the column delimiter**
+ 
  ![screenshot](fig/WoRMS_upload.png)
  
-3. Identify which columns to match to which WoRMS term.
+Identify which columns to match to which WoRMS term.
+ 
  ![screenshot](fig/WoRMS_TaxonMatch_Preview.PNG)
  
-4. Click `Match` 
+Click `Match` 
 
-5. Hopefully, a WoRMS exact match will return
+Hopefully, a WoRMS exact match will return
 
    1. In some cases you will have ambiguous matches. Resolve these rows by using the pull down menu to select the appropriate match.
    2. Non-matched taxa will appear in red. You will have to go back to your source file and determine what the appropriate text should be.      
    ![screenshot](fig/WoRMS_TaxonMatch_MatchOutput.PNG)
     
-6. Download the response as an XLS, XLSX, or text file and use the information when building the Darwin Core file(s).
+Download the response as an XLS, XLSX, or text file and use the information when building the Darwin Core file(s).
    The response from the example linked above can be found [here](data/species_matched.xlsx). A screenshot of the file
    can be seen below:
    ![screenshot](fig/matched_species_screenshot.png)
 
 ### worrms
  
-1. [_Carcharodon carcharias_](https://www.marinespecies.org/aphia.php?p=taxdetails&id=105838) (White shark)
-   ```r
-   library(worrms)
-   worms_record <- worrms::wm_records_taxamatch("Carcharodon carcharias", fuzzy = TRUE, marine_only = TRUE)[[1]]
-   worms_record$lsid;  worms_record$rank; worms_record$kingdom
-   ```
-   ```output
-   [1] "urn:lsid:marinespecies.org:taxname:105838"
-   [1] "Species"
-   [1] "Animalia"
-   ```
+[_Carcharodon carcharias_](https://www.marinespecies.org/aphia.php?p=taxdetails&id=105838) (White shark)
+
+```r
+library(worrms)
+worms_record <- worrms::wm_records_taxamatch("Carcharodon carcharias", fuzzy = TRUE, marine_only = TRUE)[[1]]
+worms_record$lsid;  worms_record$rank; worms_record$kingdom
+```
+```output
+[1] "urn:lsid:marinespecies.org:taxname:105838"
+[1] "Species"
+[1] "Animalia"
+```
 
 ### pyworms
 
-1. Bringing in [`species.csv`](data/species.csv) and collecting appropriate information from WoRMS using the pyworms package.
+Bringing in [`species.csv`](data/species.csv) and collecting appropriate information from WoRMS using the pyworms package.
 
-   __Note__ some of the responses have multiple matches, so the user needs to evaluate which match is appropriate.
-   ```python
-   import pandas as pd
-   import pyworms
-   import pprint
+__Note__ some of the responses have multiple matches, so the user needs to evaluate which match is appropriate.
+
+```python
+import pandas as pd
+import pyworms
+import pprint
+
+fname = 'https://ioos.github.io/bio_mobilization_workshop/data/species.csv'
+
+# Read in the csv data to data frame
+df = pd.read_csv(fname)
+
+# Iterate row by row through the data frame and query worms for each ScientificName term.
+for index, row in df.iterrows():
+   resp = pyworms.aphiaRecordsByMatchNames(row['ORIGINAL_NAME'], marine_only=True)
    
-   fname = 'https://ioos.github.io/bio_mobilization_workshop/data/species.csv'
-   
-   # Read in the csv data to data frame
-   df = pd.read_csv(fname)
-   
-   # Iterate row by row through the data frame and query worms for each ScientificName term.
-   for index, row in df.iterrows():
-      resp = pyworms.aphiaRecordsByMatchNames(row['ORIGINAL_NAME'], marine_only=True)
-      
-      # When no matches are found, print the non-matching name and move on
-      if len(resp[0]) == 0:
-         print('\nNo match for name "{}"'.format(row['ORIGINAL_NAME']))
-         continue
-    
-      # When more than 1 match is found, the user needs to take a look. But tell the user which one has multiple matches
-      elif len(resp[0]) > 1:
-         print('\nMultiple matches for name "{}":'.format(row['ORIGINAL_NAME']))
-         pprint.pprint(resp[0], indent=4)
-         continue
-    
-      # When only 1 match is found, put the appropriate information into the appropriate row and column
-      else:
-         worms = resp[0][0]
-         df.loc[index, 'scientificNameID'] = worms['lsid']
-         df.loc[index, 'taxonRank'] = worms['rank']
-         df.loc[index, 'kingdom'] = worms['kingdom']
-   
-   # print the first 10 rows
-   df.head()
-   ```
-   ```output
-   No match for scientific name "Zygophylax  doris (Faxon, 1893)"
-   
-   Multiple matches for scientific name "Acanthephyra brevirostris Smith, 1885"
-   
-                                    ORIGINAL_NAME                           scientificNameID taxonRank   kingdom
-   0              Zygophylax  doris (Faxon, 1893)                                        NaN       NaN       NaN
-   1       Bentheogennema intermedia (Bate, 1888)  urn:lsid:marinespecies.org:taxname:107086   Species  Animalia
-   2  Bentheogennema stephenseni Burkenroad, 1940  urn:lsid:marinespecies.org:taxname:377419   Species  Animalia
-   3       Bentheogennema pasithea (de Man, 1907)  urn:lsid:marinespecies.org:taxname:377418   Species  Animalia
-   4        Acanthephyra brevirostris Smith, 1885                                        NaN       NaN       NaN
-   ```
+   # When no matches are found, print the non-matching name and move on
+   if len(resp[0]) == 0:
+      print('\nNo match for name "{}"'.format(row['ORIGINAL_NAME']))
+      continue
+ 
+   # When more than 1 match is found, the user needs to take a look. But tell the user which one has multiple matches
+   elif len(resp[0]) > 1:
+      print('\nMultiple matches for name "{}":'.format(row['ORIGINAL_NAME']))
+      pprint.pprint(resp[0], indent=4)
+      continue
+ 
+   # When only 1 match is found, put the appropriate information into the appropriate row and column
+   else:
+      worms = resp[0][0]
+      df.loc[index, 'scientificNameID'] = worms['lsid']
+      df.loc[index, 'taxonRank'] = worms['rank']
+      df.loc[index, 'kingdom'] = worms['kingdom']
+
+# print the first 10 rows
+df.head()
+```
+```output
+No match for scientific name "Zygophylax  doris (Faxon, 1893)"
+
+Multiple matches for scientific name "Acanthephyra brevirostris Smith, 1885"
+
+                                 ORIGINAL_NAME                           scientificNameID taxonRank   kingdom
+0              Zygophylax  doris (Faxon, 1893)                                        NaN       NaN       NaN
+1       Bentheogennema intermedia (Bate, 1888)  urn:lsid:marinespecies.org:taxname:107086   Species  Animalia
+2  Bentheogennema stephenseni Burkenroad, 1940  urn:lsid:marinespecies.org:taxname:377419   Species  Animalia
+3       Bentheogennema pasithea (de Man, 1907)  urn:lsid:marinespecies.org:taxname:377418   Species  Animalia
+4        Acanthephyra brevirostris Smith, 1885                                        NaN       NaN       NaN
+```
 
 :::::::::::::::::::::
 
