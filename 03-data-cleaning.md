@@ -69,6 +69,8 @@ your package of choice to translate the dates.
 
 Below are a few examples in R and Python for converting commonly represented dates to ISO-8601.
 
+::::::::::::::::: solution
+
 1. `01/31/2021 17:00 GMT`
 
 ::::::::::::::::::::: group-tab
@@ -302,6 +304,8 @@ print(eventDateTime)
 ```
 
 :::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::
 
