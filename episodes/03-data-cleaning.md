@@ -357,8 +357,8 @@ Below are a few example tools that can be used to match scientific names to WoRM
 ::::::::::::::::: tab
 
 ### Taxon Match Tool
-1. Create a CSV (comma separated value) file with the scientific name of the species of interest. Here we are showing 
-   some of the contents of the file [`species.csv`](data/species.csv).
+
+1. Create a CSV (comma separated value) file with the scientific name of the species of interest. Here we are showing some of the contents of the file [`species.csv`](data/species.csv).
 
    ![screenshot](fig/species_file_screenshot.png)
 
