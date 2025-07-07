@@ -360,30 +360,30 @@ Below are a few example tools that can be used to match scientific names to WoRM
 
 Create a CSV (comma separated value) file with the scientific name of the species of interest. Here we are showing some of the contents of the file [`species.csv`](data/species.csv).
 
-![screenshot](fig/species_file_screenshot.png)
+![](fig/species_file_screenshot.png)
 
 Upload that file to the [WoRMS Taxon match service](https://www.marinespecies.org/aphia.php?p=match)
    * **make sure the option LSID is checked**
    * **for the example file, make sure you select LineFeed as the row delimiter and Tab as the column delimiter**
  
- ![screenshot](fig/WoRMS_upload.png)
+ ![](fig/WoRMS_upload.png)
  
 Identify which columns to match to which WoRMS term.
  
- ![screenshot](fig/WoRMS_TaxonMatch_Preview.PNG)
+ ![](fig/WoRMS_TaxonMatch_Preview.PNG)
  
-Click `Match` 
+Click **Match**.
 
 Hopefully, a WoRMS exact match will return
 
    1. In some cases you will have ambiguous matches. Resolve these rows by using the pull down menu to select the appropriate match.
    2. Non-matched taxa will appear in red. You will have to go back to your source file and determine what the appropriate text should be.      
-   ![screenshot](fig/WoRMS_TaxonMatch_MatchOutput.PNG)
+   ![](fig/WoRMS_TaxonMatch_MatchOutput.PNG)
     
 Download the response as an XLS, XLSX, or text file and use the information when building the Darwin Core file(s).
    The response from the example linked above can be found [here](data/species_matched.xlsx). A screenshot of the file
    can be seen below:
-   ![screenshot](fig/matched_species_screenshot.png)
+   ![](fig/matched_species_screenshot.png)
 
 ### worrms
  
