@@ -69,224 +69,52 @@ your package of choice to translate the dates.
 
 Below are a few examples in R and Python for converting commonly represented dates to ISO-8601.
 
-::::::::::::::::: tab
+1. `01/31/2021 17:00 GMT`
+
+::::::::::::::::::::: group-tab
 
 ### Python
 
-When dealing with dates using pandas in Python it is best to create a Series as your time column with the appropriate 
-datatype. Then, when writing your file(s) using [.to_csv()](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html)
-you can specify the format which your date will be written in using the `date_format` parameter. 
-
-The examples below show how to use the [pandas.to_datetime()](https://pandas.pydata.org/docs/reference/api/pandas.to_datetime.html)
-function to read various date formats. The process can be applied to entire columns (or Series) within a DataFrame.
-
-1. `01/31/2021 17:00 GMT`
- 
-   This date follows a typical date construct of `month`**/**`day`**/**`year` `24-hour`**:**`minute` `time-zone`. The 
-   pandas `.to_datetime()` function will correctly interpret these dates without the `format` parameter.
- 
-   ```python
-   import pandas as pd
-   df = pd.DataFrame({'date':['01/31/2021 17:00 GMT']})
-   df['eventDate'] = pd.to_datetime(df['date'], format="%m/%d/%Y %H:%M %Z")
-   df
-   ```
-   ```output
-                       date                 eventDate
-       01/31/2021 17:00 GMT 2021-01-31 17:00:00+00:00
-   ``` 
-
-2. `31/01/2021 12:00 EST`
-
-   This date is similar to the first date but switches the `month` and `day` and identifies a different `time-zone`.
-   The construct looks like `day`**/**`month`**/**`year` `24-hour`**:**`minute` `time-zone`
-   ```python
-   import pandas as pd
-   df = pd.DataFrame({'date':['31/01/2021 12:00 EST']})
-   df['eventDate'] = pd.to_datetime(df['date'], format="%d/%m/%Y %H:%M %Z")
-   df
-   ```
-   ```output
-                      date                 eventDate
-      31/01/2021 12:00 EST 2021-01-31 12:00:00-05:00
-   ``` 
-
-3. `January, 01 2021 5:00 PM GMT`
-   
-   ```python
-   import pandas as pd
-   df = pd.DataFrame({'date':['January, 01 2021 5:00 PM GMT']})
-   df['eventDate'] = pd.to_datetime(df['date'],format='%B, %d %Y %I:%M %p %Z')
-   df
-   ```
-   ```output
-                              date                 eventDate
-      January, 01 2021 5:00 PM GMT 2021-01-01 17:00:00+00:00
-   ```
-
-4. `1612112400` in seconds since 1970
-   
-   This uses the units of `seconds since 1970` which is common when working with data in [netCDF](https://www.unidata.ucar.edu/software/netcdf/).
-   ```python
-   import pandas as pd
-   df = pd.DataFrame({'date':['1612112400']})
-   df['eventDate'] = pd.to_datetime(df['date'], unit='s', origin='unix')
-   df
-   ```
-   ```output
-            date           eventDate
-      1612112400 2021-01-31 17:00:00
-   ```
-   
-5. `44227.708333333333`
-   
-   This is the numerical value for dates in Excel because Excel stores dates as sequential serial numbers so that they 
-   can be used in calculations. In some cases, when you export an Excel spreadsheet to CSV, the 
-   dates are preserved as a floating point number.
-   ```python
-   import pandas as pd
-   df = pd.DataFrame({'date':['44227.708333333333']})
-   df['eventDate'] = pd.to_datetime(df['date'].astype(float), unit='D', origin='1899-12-30')
-   df
-   ```
-   ```output
-                    date                     eventDate
-      44227.708333333333 2021-01-31 17:00:00.000000256
-   ```
-   
-6. Observations with a start date of `2021-01-30` and an end date of `2021-01-31`.
-
-   Here we store the date as a duration following the ISO 8601 convention. In some cases, it is easier to use a regular 
-   expression or simply paste strings together:
-   ```python
-   import pandas as pd
-   df = pd.DataFrame({'start_date':['2021-01-30'],
-                      'end_date':['2021-01-31']})
-   df['eventDate'] = df['start_date']+'/'+df['end_date']
-   df
-   ```
-   ```output
-      start_time    end_time              eventDate
-      2021-01-30  2021-01-31  2021-01-30/2021-01-31
-   ```
+```python
+import pandas as pd
+df = pd.DataFrame({'date':['01/31/2021 17:00 GMT']})
+df['eventDate'] = pd.to_datetime(df['date'], format="%m/%d/%Y %H:%M %Z")
+df
+```
+```output
+                    date                 eventDate
+    01/31/2021 17:00 GMT 2021-01-31 17:00:00+00:00
+``` 
 
 ### R
 
-When dealing with dates using R, there are a few base functions that are useful to wrangle your dates in the correct format. An R package that is useful is [lubridate](https://cran.r-project.org/web/packages/lubridate/lubridate.pdf), which is part of the `tidyverse`. It is recommended to bookmark this [lubridate cheatsheet](https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_lubridate.pdf).
-The examples below show how to use the `lubridate` package and format your data to the ISO-8601 standard.
+```r
+library(lubridate)
+date_str <- '01/31/2021 17:00 GMT'
+date <- lubridate::mdy_hm(date_str,tz="UTC")
+date <- lubridate::format_ISO8601(date) # Separates date and time with a T.
+date <- paste0(date, "Z") # Add a Z because time is in UTC.
+date
+```
+```output
+[1] "2021-01-31T17:00:00Z"
+```
 
-1.  `01/31/2021 17:00 GMT`
+:::::::::::::::::::::::::::::::
 
-   ```r
-   library(lubridate)
-   date_str <- '01/31/2021 17:00 GMT'
-   date <- lubridate::mdy_hm(date_str,tz="UTC")
-   date <- lubridate::format_ISO8601(date) # Separates date and time with a T.
-   date <- paste0(date, "Z") # Add a Z because time is in UTC.
-   date
-   ```
-   ```output
-   [1] "2021-01-31T17:00:00Z"
-   ```
 2. `31/01/2021 12:00 EST`
 
-   ```r
-   library(lubridate)
-   date_str <- '31/01/2021 12:00 EST'
-   date <- lubridate::dmy_hm(date_str,tz="EST")
-   date <- lubridate::with_tz(date,tz="UTC")
-   date <- lubridate::format_ISO8601(date)
-   date <- paste0(date, "Z")
-   date
-   ```
-   ```output
-   [1] "2021-01-31T17:00:00Z"
-   ```
-   
-3. `January, 01 2021 5:00 PM GMT`
-   ```r
-   library(lubridate)
-   date_str <- 'January, 01 2021 5:00 PM GMT'
-   date <- lubridate::mdy_hm(date_str, tz="GMT")
-   lubridate::with_tz(date,tz="UTC")
-   lubridate::format_ISO8601(date)
-   date <- paste0(date, "Z")
-   date
-   ```
-   ```output
-   [1] "2021-01-01T17:00:00Z"
-   ```
-    
-4. `1612112400` in seconds since 1970
+::::::::::::::::::::: group-tab
 
-   This uses the units of `seconds since 1970` which is common when working with data in [netCDF](https://www.unidata.ucar.edu/software/netcdf/).
+### Python
 
-   ```r
-   library(lubridate)
-   date_str <- '1612112400'
-   date_str <- as.numeric(date_str)
-   date <- lubridate::as_datetime(date_str, origin = lubridate::origin, tz = "UTC")
-   date <- lubridate::format_ISO8601(date)
-   date <- paste0(date, "Z")
-   date
-   ```
-   ```output
-   [1] "2021-01-31T17:00:00Z"
-   ```
-    
-5. `44227.708333333333`
-    
-   This is the numerical value for dates in Excel because Excel stores dates as sequential serial numbers so that they 
-   can be used in calculations. In some cases, when you export an Excel spreadsheet to CSV, the 
-   dates are preserved as a floating point number.
+4
 
-   ```r
-   library(openxlsx)
-   library(lubridate)
-   date_str <- 44227.708333333333
-   date <- as.Date(date_str, origin = "1899-12-30") # If you're only interested in the YYYY-MM-DD
-   fulldate <- openxlsx::convertToDateTime(date_str, tz = "UTC")
-   fulldate <- lubridate::format_ISO8601(fulldate)
-   fulldate <- paste0(fulldate, "Z")
-   print(date)
-   print(fulldate)
-   ```
-   ```output
-   [1] "2021-01-31"
-   [1] "2021-01-31T17:00:00Z"
-   ```
-   
-6. Observations with a start date of `2021-01-30` and an end date of `2021-01-31`. For added complexity, consider adding in a 4-digit deployment and retrieval time.
- 
-   Here we store the date as a duration following the ISO 8601 convention. In some cases, it is easier to use a regular 
-   expression or simply paste strings together:
-    
-   ```r
-   library(lubridate)
-   event_start <- '2021-01-30'
-   event_finish <- '2021-01-31'
-   deployment_time <- 1002
-   retrieval_time <- 1102
-   # Time is recorded numerically (1037 instead of 10:37), so need to change these columns:
-   deployment_time <- substr(as.POSIXct(sprintf("%04.0f", deployment_time), format = "%H%M"), 12, 16)
-   retrieval_time <- substr(as.POSIXct(sprintf("%04.0f", retrieval_time, format = "%H%M"), 12, 16)
-   # If you're interested in just pasting the event dates together:
-   eventDate <- paste(event_start, event_finish, sep = "/") 
-   # If you're interested in including the deployment and retrieval times in the eventDate:
-   eventDateTime_start <- lubridate::format_ISO8601(as.POSIXct(paste(event_start, deployment_time), tz = "UTC"))
-   eventDateTime_start <- paste0(eventDateTime_start, "Z")
-   eventDateTime_finish <- lubridate::format_ISO8601(as.POSIXct(paste(event_finish, retrieval_time), tz = "UTC"))
-   eventDateTime_finish <- paste0(eventDateTime_finish, "Z")
-   eventDateTime <- paste(eventDateTime_start, eventDateTime_finish, sep = "/") 
-   print(eventDate)
-   print(eventDateTime)
-   ```
-   ```output
-   [1] "2021-01-30/2021-01-31"
-   [1] "2021-01-30T10:02:00Z/2021-01-31T11:02:00Z"
-   ```
+### R
 
-:::::::::::::::::::::
+5
+
+:::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::
 
