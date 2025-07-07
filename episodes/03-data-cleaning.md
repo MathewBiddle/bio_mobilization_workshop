@@ -68,8 +68,6 @@ your package of choice to translate the dates.
 
 Below are a few examples in R and Python for converting commonly represented dates to ISO-8601.
 
-::::::::::::::::: solution
-
 ::::::::::::::::: tab
 
 ### Python
@@ -288,8 +286,6 @@ The examples below show how to use the `lubridate` package and format your data 
    ```
 
 :::::::::::::::::::::
-
-::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::
 
