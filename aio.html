@@ -6,21 +6,27 @@
 <title>Marine Biological Data Mobilization Workshop 2024: All in One View</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="assets/themetoggle.js"></script><link rel="stylesheet" type="text/css" href="assets/styles.css">
-<script src="assets/scripts.js" type="text/javascript"></script><!-- mathjax --><script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      config: ["MMLorHTML.js"],
-      jax: ["input/TeX","input/MathML","output/HTML-CSS","output/NativeMML", "output/PreviewHTML"],
-      extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js", "fast-preview.js", "AssistiveMML.js", "a11y/accessibility-menu.js"],
-      TeX: {
-        extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
-      },
-      tex2jax: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
-        processEscapes: true
-      }
-    });
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><!-- Responsive Favicon for The Carpentries --><link rel="apple-touch-icon" sizes="180x180" href="favicons/incubator/apple-touch-icon.png">
+<script src="assets/scripts.js" type="text/javascript"></script><!-- mathjax --><!-- NOTE: https://docs.mathjax.org/en/latest/output/mathml.html#mathml-support --><!-- Changes from V2 to V4: https://mathjax.github.io/MathJax-demos-web/convert-configuration/convert-configuration.html
+        Jax output/NativeMML is not yet implemented
+        Jax output/PreviewHTML is not yet implemented
+        Extension fast-preview is not yet implemented (but may be in a future release)
+    --><script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
+            processEscapes: true,
+            packages: ['base', 'ams', 'noerrors', 'noundefined']
+        },
+        options: {
+            ignoreHtmlClass: 'tex2jax_ignore',
+            processHtmlClass: 'tex2jax_process'
+        },
+        loader: {
+            load: ['a11y/assistive-mml', '[tex]/noerrors']
+        }
+    };
+    </script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script><!-- Responsive Favicon for The Carpentries --><link rel="apple-touch-icon" sizes="180x180" href="favicons/incubator/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicons/incubator/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicons/incubator/favicon-16x16.png">
 <link rel="manifest" href="favicons/incubator/site.webmanifest">
@@ -47,8 +53,8 @@
       </div>
     </div>
     <div class="selector-container">
-      <div id="theme-selector">
-        <li class="nav-item dropdown" id="theme-button-list">
+      <menu class="theme-selector" id="theme-selector-menu">
+<li class="nav-item dropdown theme-button-list" id="theme-button-list-menu">
           <button class="btn btn-link nav-link px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">
             <svg class="bi my-1 theme-icon-active"><use href="#circle-half"></use></svg><i data-feather="chevron-down"></i>
           </button>
@@ -73,9 +79,8 @@
             </li>
           </ul>
 </li>
-      </div>
-
-      <div class="dropdown" id="instructor-dropdown">
+    </menu>
+<div class="dropdown" id="instructor-dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Learner View <i data-feather="chevron-down"></i>
         </button>
@@ -85,7 +90,7 @@
 </div>
     </div>
   </div>
-  <hr></header><nav class="navbar navbar-expand-xl bottom-nav incubator" aria-label="Main Navigation"><div class="container-fluid nav-container">
+</header><nav class="navbar navbar-expand-xl bottom-nav incubator" aria-label="Main Navigation"><div class="container-fluid nav-container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle Navigation">
       <span class="navbar-toggler-icon"></span>
       <span class="menu-title">Menu</span>
@@ -144,29 +149,18 @@
     <a id="search-button" class="btn btn-primary" href="aio.html" role="button" aria-label="Search the All In One page">Search the All In One page</a>
   </div>
 <!--/div.container-fluid -->
-</nav><div class="col-md-12 mobile-title">
-  Marine Biological Data Mobilization Workshop 2024
-</div>
-
-<aside class="col-md-12 lesson-progress"><div style="width: %" class="percentage">
-    %
-  </div>
-  <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: %" aria-valuenow="" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
-    </div>
-  </div>
-</aside><div class="container">
+</nav><div class="container">
       <div class="row">
         <!-- START: inst/pkgdown/templates/navbar.html -->
 <div id="sidebar-col" class="col-lg-4">
   <div id="sidebar" class="sidebar">
-      <nav aria-labelledby="flush-headingEleven"><button role="button" aria-label="close menu" alt="close menu" aria-expanded="true" aria-controls="sidebar" class="collapse-toggle" data-collapse="Collapse " data-episodes="Episodes ">
+      <nav aria-labelledby="flush-collapse-chapters-toggle"><button role="button" aria-label="Collapse" alt="Collapse" aria-expanded="true" aria-controls="sidebar" class="collapse-toggle" data-collapse="Collapse " data-episodes="Episodes ">
           <i class="search-icon" data-feather="x" role="img"></i>
         </button>
         <div class="sidebar-inner">
           <div class="row mobile-row" id="theme-row-mobile">
-            <div class="col" id="theme-selector">
-              <li class="nav-item dropdown" id="theme-button-list">
+            <menu class="col theme-selector" id="theme-selector-sidebar">
+<li class="nav-item dropdown theme-button-list" id="theme-button-list-sidebar">
                 <button class="btn btn-link nav-link px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">
                   <svg class="bi my-1 theme-icon-active"><use href="#circle-half"></use></svg><span class="d-lg-none ms-1" id="bd-theme-text">Toggle Theme</span>
                 </button>
@@ -191,19 +185,19 @@
                   </li>
                 </ul>
 </li>
-            </div>
-          </div>
+            </menu>
+</div>
           <div class="row mobile-row">
             <div class="col">
               <div class="sidenav-view-selector">
-                <div class="accordion accordion-flush" id="accordionFlush9">
+                <div class="accordion accordion-flush" id="accordion-instructor-toggle">
                   <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingNine">
-                      <button class="accordion-button collapsed" id="instructor" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
+                    <h2 class="accordion-header" id="flush-heading-instructor-toggle">
+                      <button class="accordion-button collapsed" id="instructor" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-instructor-toggle" aria-expanded="false" aria-controls="flush-collapse-instructor-toggle">
                         <i id="eye" aria-hidden="true" class="icon" data-feather="eye"></i> Learner View
                       </button>
                     </h2>
-                    <div id="flush-collapseNine" class="accordion-collapse collapse" aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlush2">
+                    <div id="flush-collapse-instructor-toggle" class="accordion-collapse collapse" data-bs-parent="#accordion-instructor-toggle">
                       <div class="accordion-body">
                         <a href="instructor/aio.html">Instructor View</a>
                       </div>
@@ -217,19 +211,18 @@
             </div>
 <!--/div.col -->
 
-            <hr>
-</div>
+          </div>
 <!--/div.mobile-row -->
 
-          <div class="accordion accordion-flush" id="accordionFlush11">
+          <div class="accordion accordion-flush" id="accordion-chapters-toggle">
             <div class="accordion-item">
 
-              <button id="chapters" class="accordion-button show" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEleven" aria-expanded="false" aria-controls="flush-collapseEleven">
-                <h2 class="accordion-header chapters" id="flush-headingEleven">
+              <button id="chapters" class="accordion-button show" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-chapters-toggle" aria-expanded="false" aria-controls="flush-collapse-chapters-toggle">
+                <h2 class="accordion-header chapters" id="flush-heading-chapters-toggle">
                   EPISODES
                 </h2>
               </button>
-              <div id="flush-collapseEleven" class="accordion-collapse show collapse" aria-labelledby="flush-headingEleven" data-bs-parent="#accordionFlush11">
+              <div id="flush-collapse-chapters-toggle" class="accordion-collapse show collapse" data-bs-parent="#accordion-chapters-toggle">
 
                 <div class="accordion-body">
                   <div class="accordion accordion-flush" id="accordionFlush1">
@@ -345,14 +338,14 @@
             </div>
 
             <hr class="half-width">
-<div class="accordion accordion-flush lesson-resources" id="accordionFlush12">
+<div class="accordion accordion-flush lesson-resources" id="accordion-resources-toggle">
               <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingTwelve">
-                  <button class="accordion-button collapsed" id="lesson-resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
+                <h2 class="accordion-header" id="flush-heading-resources-toggle">
+                  <button class="accordion-button collapsed" id="lesson-resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-resources-toggle" aria-expanded="false" aria-controls="flush-collapse-resources-toggle">
                     RESOURCES
                   </button>
                 </h2>
-                <div id="flush-collapseTwelve" class="accordion-collapse collapse" aria-labelledby="flush-headingTwelve" data-bs-parent="#accordionFlush12">
+                <div id="flush-collapse-resources-toggle" class="accordion-collapse collapse" data-bs-parent="#accordion-resources-toggle">
                   <div class="accordion-body">
                     <ul>
 <li>
@@ -396,7 +389,7 @@
         <!-- START: inst/pkgdown/templates/content-extra.html -->
   <div class="col-xl-8 col-lg-12 primary-content">
     <main id="main-content" class="main-content"><div class="container lesson-content">
-        
+        <h1>All in One View</h1>
         
 <section id="aio-01-introduction"><p>Content from <a href="01-introduction.html">Introduction to Darwin Core</a></p>
 <hr>
@@ -489,7 +482,7 @@ or that you don’t understand what it is?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <pre class="folder"><code>dwca-tpwd_harc_texasaransasbay_bagseine-v2.3
  |-- eml.xml
@@ -554,7 +547,7 @@ DwC term headers!</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li><a href="https://dwc.tdwg.org/terms/#dwc:eventDate" class="external-link"><code>eventDate</code></a></li>
@@ -591,20 +584,20 @@ mapping document/spreadsheet (or document it as a comment in your
 script). List out all of your column headers in one column and document
 the appropriate Dawin Core term(s) in a second column. For example:</p>
 <table class="table">
-<thead><tr class="header">
+<thead><tr>
 <th>my term</th>
 <th>DwC term</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>lat</td>
 <td>decimalLatitude</td>
 </tr>
-<tr class="even">
+<tr>
 <td>date</td>
 <td>eventDate</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>species</td>
 <td>scientificName</td>
 </tr>
@@ -627,14 +620,14 @@ OBIS plus a few that are needed for GBIF.</p>
 <col width="35%">
 <col width="15%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Darwin Core Term</th>
 <th>Definition</th>
 <th>Comment</th>
 <th>Example</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:occurrenceID" class="external-link"><code>occurrenceID</code></a></td>
 <td>An identifier for the Occurrence (as opposed to a particular digital
 record of the occurrence). In the absence of a persistent global unique
@@ -650,7 +643,7 @@ occurrenceIDs see the <a href="%7B%7B%20page.root%20%7D%7D/06-qa-qc/index.html">
 section of the workshop.</td>
 <td>Station_95_Date_09JAN1997:14:35:00.000_Atractosteus_spatula</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:basisOfRecord" class="external-link"><code>basisOfRecord</code></a></td>
 <td>The specific nature of the data record.</td>
 <td>Pick from these controlled vocabulary terms: <a href="http://rs.tdwg.org/dwc/terms/HumanObservation" class="external-link">HumanObservation</a>,
@@ -664,7 +657,7 @@ section of the workshop.</td>
 </td>
 <td>HumanObservation</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:scientificName" class="external-link"><code>scientificName</code></a></td>
 <td>The full scientific name, with authorship and date information if
 known. When forming part of an Identification, this should be the name
@@ -676,7 +669,7 @@ supplied in the <code>identificationQualifier</code> term.</td>
 <code>identificationQualifier</code> see <a href="https://doi.org/10.3389/fmars.2021.620702" class="external-link">this paper</a>.</td>
 <td>Atractosteus spatula</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:scientificNameID" class="external-link"><code>scientificNameID</code></a></td>
 <td>An identifier for the nomenclatural (not taxonomic) details of a
 scientific name.</td>
@@ -684,7 +677,7 @@ scientific name.</td>
 the end are the AphiaID from WoRMS.</td>
 <td><a href="urn:lsid:marinespecies.org:taxname:218214" class="uri">urn:lsid:marinespecies.org:taxname:218214</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:eventDate" class="external-link"><code>eventDate</code></a></td>
 <td>The date-time or interval during which an Event occurred. For
 occurrences, this is the date-time when the event was recorded. Not
@@ -694,7 +687,7 @@ suitable for a time in a geological context.</td>
 Cleaning</a> section of the workshop.</td>
 <td>2009-02-20T08:40Z</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:decimalLatitude" class="external-link"><code>decimalLatitude</code></a></td>
 <td>The geographic latitude (in decimal degrees, using the spatial
 reference system given in geodeticDatum) of the geographic center of a
@@ -708,7 +701,7 @@ coordinates in the <a href="%7B%7B%20page.root%20%7D%7D/03-data-cleaning/index.h
 Cleaning</a> section of the workshop.</td>
 <td>-41.0983423</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:decimalLongitude" class="external-link"><code>decimalLongitude</code></a></td>
 <td>The geographic longitude (in decimal degrees, using the spatial
 reference system given in geodeticDatum) of the geographic center of a
@@ -720,7 +713,7 @@ See more information on coordinates in the <a href="%7B%7B%20page.root%20%7D%7D/
 Cleaning</a> section of the workshop.</td>
 <td>-121.1761111</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:occurrenceStatus" class="external-link"><code>occurrenceStatus</code></a></td>
 <td>A statement about the presence or absence of a Taxon at a
 Location.</td>
@@ -728,7 +721,7 @@ Location.</td>
 <code>absent</code>.</td>
 <td>present</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:countryCode" class="external-link"><code>countryCode</code></a></td>
 <td>The standard code for the country in which the location occurs.</td>
 <td>Use an <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" class="external-link">ISO
@@ -737,7 +730,7 @@ to have this for their system. For international waters, leave
 blank.</td>
 <td>US, MX, CA</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:kingdom" class="external-link"><code>kingdom</code></a></td>
 <td>The full scientific name of the kingdom in which the taxon is
 classified.</td>
@@ -745,7 +738,7 @@ classified.</td>
 names that are the same but in different kingdoms.</td>
 <td>Animalia</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwciri:geodeticDatum" class="external-link"><code>geodeticDatum</code></a></td>
 <td>The ellipsoid, geodetic datum, or spatial reference system (SRS)
 upon which the geographic coordinates given in decimalLatitude and
@@ -773,14 +766,14 @@ them if you can.</p>
 <col width="41%">
 <col width="2%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Darwin Core Term</th>
 <th>Definition</th>
 <th>Comment</th>
 <th>Example</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:minimumDepthInMeters" class="external-link"><code>minimumDepthInMeters</code></a></td>
 <td>The lesser depth of a range of depth below the local surface, in
 meters.</td>
@@ -788,7 +781,7 @@ meters.</td>
 you’ll put that in both minimum and maximum depth fields.</td>
 <td>0.1</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:maximumDepthInMeters" class="external-link"><code>maximumDepthInMeters</code></a></td>
 <td>The greater depth of a range of depth below the local surface, in
 meters.</td>
@@ -797,7 +790,7 @@ and <a href="https://dwc.tdwg.org/terms/#dwc:maximumDistanceAboveSurfaceInMeters
 </td>
 <td>10.5</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:coordinateUncertaintyInMeters" class="external-link"><code>coordinateUncertaintyInMeters</code></a></td>
 <td>The horizontal distance (in meters) from the given decimalLatitude
 and decimalLongitude describing the smallest circle containing the whole
@@ -808,42 +801,42 @@ coordinates). Zero is not a valid value for this term</td>
 uncertainty is crucial for downstream analyses.</td>
 <td>15</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:samplingProtocol" class="external-link"><code>samplingProtocol</code></a></td>
 <td>The names of, references to, or descriptions of the methods or
 protocols used during an Event.</td>
 <td></td>
 <td>Bag Seine</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:taxonRank" class="external-link"><code>taxonRank</code></a></td>
 <td>The taxonomic rank of the most specific name in the
 scientificName.</td>
 <td>Also helps with disambiguation of scientific names.</td>
 <td>Species</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:organismQuantity" class="external-link"><code>organismQuantity</code></a></td>
 <td>A number or enumeration value for the quantity of organisms.</td>
 <td>OBIS also likes to see this in the Extended Measurement or Fact
 extension.</td>
 <td>2.6</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:organismQuantityType" class="external-link"><code>organismQuantityType</code></a></td>
 <td>The type of quantification system used for the quantity of
 organisms.</td>
 <td></td>
 <td>Relative Abundance</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:datasetName" class="external-link"><code>datasetName</code></a></td>
 <td>The name identifying the data set from which the record was
 derived.</td>
 <td></td>
 <td>TPWD HARC Texas Coastal Fisheries Aransas Bag Bay Seine</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:dataGeneralizations" class="external-link"><code>dataGeneralizations</code></a></td>
 <td>Actions taken to make the shared data less specific or complete than
 in its original form. Suggests that alternative data of higher quality
@@ -855,7 +848,7 @@ users.</td>
 <td>Coordinates generalized from original GPS coordinates to the nearest
 half degree grid cell</td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:informationWithheld" class="external-link"><code>informationWithheld</code></a></td>
 <td>Additional information that exists, but that has not been shared in
 the given record.</td>
@@ -863,7 +856,7 @@ the given record.</td>
 species or for other reasons.</td>
 <td>location information not given for endangered species</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:institutionCode" class="external-link"><code>institutionCode</code></a></td>
 <td>The name (or acronym) in use by the institution having custody of
 the object(s) or information referred to in the record.</td>
@@ -1023,12 +1016,12 @@ of choice to translate the dates.</p>
 <col width="30%">
 <col width="26%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Darwin Core Term</th>
 <th>Description</th>
 <th>Example</th>
 </tr></thead>
-<tbody><tr class="odd">
+<tbody><tr>
 <td><a href="https://dwc.tdwg.org/list/#dwc_eventDate" class="external-link">eventDate</a></td>
 <td>The date-time or interval during which an Event occurred. For
 occurrences, this is the date-time when the event was recorded. Not
@@ -1089,10 +1082,10 @@ represented dates to ISO-8601.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'date'</span>:[<span class="st">'01/31/2021 17:00 GMT'</span>]})</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>df[<span class="st">'eventDate'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'date'</span>], <span class="bu">format</span><span class="op">=</span><span class="st">"%m/</span><span class="sc">%d</span><span class="st">/%Y %H:%M %Z"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>df</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'date'</span>:[<span class="st">'01/31/2021 17:00 GMT'</span>]})</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a>df[<span class="st">'eventDate'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'date'</span>], <span class="bu">format</span><span class="op">=</span><span class="st">"%m/</span><span class="sc">%d</span><span class="st">/%Y %H:%M %Z"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1" aria-label="code-block-1-4"></a>df</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1142,10 +1135,10 @@ represented dates to ISO-8601.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'date'</span>:[<span class="st">'31/01/2021 12:00 EST'</span>]})</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>df[<span class="st">'eventDate'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'date'</span>], <span class="bu">format</span><span class="op">=</span><span class="st">"</span><span class="sc">%d</span><span class="st">/%m/%Y %H:%M %Z"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>df</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1" aria-label="code-block-5-2"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'date'</span>:[<span class="st">'31/01/2021 12:00 EST'</span>]})</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1" aria-label="code-block-5-3"></a>df[<span class="st">'eventDate'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'date'</span>], <span class="bu">format</span><span class="op">=</span><span class="st">"</span><span class="sc">%d</span><span class="st">/%m/%Y %H:%M %Z"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1" aria-label="code-block-5-4"></a>df</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1196,10 +1189,10 @@ represented dates to ISO-8601.</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'date'</span>:[<span class="st">'January, 01 2021 5:00 PM GMT'</span>]})</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>df[<span class="st">'eventDate'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'date'</span>],<span class="bu">format</span><span class="op">=</span><span class="st">'%B, </span><span class="sc">%d</span><span class="st"> %Y %I:%M %p %Z'</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>df</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1" aria-label="code-block-9-2"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'date'</span>:[<span class="st">'January, 01 2021 5:00 PM GMT'</span>]})</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1" aria-label="code-block-9-3"></a>df[<span class="st">'eventDate'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'date'</span>],<span class="bu">format</span><span class="op">=</span><span class="st">'%B, </span><span class="sc">%d</span><span class="st"> %Y %I:%M %p %Z'</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1" aria-label="code-block-9-4"></a>df</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1253,10 +1246,10 @@ common when working with data in <a href="https://www.unidata.ucar.edu/software/
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'date'</span>:[<span class="st">'1612112400'</span>]})</span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>df[<span class="st">'eventDate'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'date'</span>], unit<span class="op">=</span><span class="st">'s'</span>, origin<span class="op">=</span><span class="st">'unix'</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>df</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1" aria-label="code-block-13-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1" aria-label="code-block-13-2"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'date'</span>:[<span class="st">'1612112400'</span>]})</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1" aria-label="code-block-13-3"></a>df[<span class="st">'eventDate'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'date'</span>], unit<span class="op">=</span><span class="st">'s'</span>, origin<span class="op">=</span><span class="st">'unix'</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1" aria-label="code-block-13-4"></a>df</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1313,10 +1306,10 @@ CSV, the dates are preserved as a floating point number.</p>
 <div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'date'</span>:[<span class="st">'44227.708333333333'</span>]})</span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>df[<span class="st">'eventDate'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'date'</span>].astype(<span class="bu">float</span>), unit<span class="op">=</span><span class="st">'D'</span>, origin<span class="op">=</span><span class="st">'1899-12-30'</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>df</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1" aria-label="code-block-17-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1" aria-label="code-block-17-2"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'date'</span>:[<span class="st">'44227.708333333333'</span>]})</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1" aria-label="code-block-17-3"></a>df[<span class="st">'eventDate'</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">'date'</span>].astype(<span class="bu">float</span>), unit<span class="op">=</span><span class="st">'D'</span>, origin<span class="op">=</span><span class="st">'1899-12-30'</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1" aria-label="code-block-17-4"></a>df</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1379,11 +1372,11 @@ simply paste strings together:</p>
 <div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'start_date'</span>:[<span class="st">'2021-01-30'</span>],</span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>                   <span class="st">'end_date'</span>:[<span class="st">'2021-01-31'</span>]})</span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>df[<span class="st">'eventDate'</span>] <span class="op">=</span> df[<span class="st">'start_date'</span>]<span class="op">+</span><span class="st">'/'</span><span class="op">+</span>df[<span class="st">'end_date'</span>]</span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>df</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1" aria-label="code-block-21-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1" aria-label="code-block-21-2"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'start_date'</span>:[<span class="st">'2021-01-30'</span>],</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1" aria-label="code-block-21-3"></a>                   <span class="st">'end_date'</span>:[<span class="st">'2021-01-31'</span>]})</span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1" aria-label="code-block-21-4"></a>df[<span class="st">'eventDate'</span>] <span class="op">=</span> df[<span class="st">'start_date'</span>]<span class="op">+</span><span class="st">'/'</span><span class="op">+</span>df[<span class="st">'end_date'</span>]</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1" aria-label="code-block-21-5"></a>df</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1399,24 +1392,24 @@ simply paste strings together:</p>
 <div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>event_start <span class="ot">&lt;-</span> <span class="st">'2021-01-30'</span></span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>event_finish <span class="ot">&lt;-</span> <span class="st">'2021-01-31'</span></span>
-<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>deployment_time <span class="ot">&lt;-</span> <span class="dv">1002</span></span>
-<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>retrieval_time <span class="ot">&lt;-</span> <span class="dv">1102</span></span>
-<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a><span class="co"># Time is recorded numerically (1037 instead of 10:37), so need to change these columns:</span></span>
-<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a>deployment_time <span class="ot">&lt;-</span> <span class="fu">substr</span>(<span class="fu">as.POSIXct</span>(<span class="fu">sprintf</span>(<span class="st">"%04.0f"</span>, deployment_time), <span class="at">format =</span> <span class="st">"%H%M"</span>), <span class="dv">12</span>, <span class="dv">16</span>)</span>
-<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>retrieval_time <span class="ot">&lt;-</span> <span class="fu">substr</span>(<span class="fu">as.POSIXct</span>(<span class="fu">sprintf</span>(<span class="st">"%04.0f"</span>, retrieval_time, <span class="at">format =</span> <span class="st">"%H%M"</span>), <span class="dv">12</span>, <span class="dv">16</span>)</span>
-<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a><span class="co"># If you're interested in just pasting the event dates together:</span></span>
-<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a>eventDate <span class="ot">&lt;-</span> <span class="fu">paste</span>(event_start, event_finish, <span class="at">sep =</span> <span class="st">"/"</span>) </span>
-<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a><span class="co"># If you're interested in including the deployment and retrieval times in the eventDate:</span></span>
-<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a>eventDateTime_start <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">format_ISO8601</span>(<span class="fu">as.POSIXct</span>(<span class="fu">paste</span>(event_start, deployment_time), <span class="at">tz =</span> <span class="st">"UTC"</span>))</span>
-<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a>eventDateTime_start <span class="ot">&lt;-</span> <span class="fu">paste0</span>(eventDateTime_start, <span class="st">"Z"</span>)</span>
-<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a>eventDateTime_finish <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">format_ISO8601</span>(<span class="fu">as.POSIXct</span>(<span class="fu">paste</span>(event_finish, retrieval_time), <span class="at">tz =</span> <span class="st">"UTC"</span>))</span>
-<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a>eventDateTime_finish <span class="ot">&lt;-</span> <span class="fu">paste0</span>(eventDateTime_finish, <span class="st">"Z"</span>)</span>
-<span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a>eventDateTime <span class="ot">&lt;-</span> <span class="fu">paste</span>(eventDateTime_start, eventDateTime_finish, <span class="at">sep =</span> <span class="st">"/"</span>) </span>
-<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a><span class="fu">print</span>(eventDate)</span>
-<span id="cb23-18"><a href="#cb23-18" tabindex="-1"></a><span class="fu">print</span>(eventDateTime)</span></code></pre>
+<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1" aria-label="code-block-23-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1" aria-label="code-block-23-2"></a>event_start <span class="ot">&lt;-</span> <span class="st">'2021-01-30'</span></span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1" aria-label="code-block-23-3"></a>event_finish <span class="ot">&lt;-</span> <span class="st">'2021-01-31'</span></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1" aria-label="code-block-23-4"></a>deployment_time <span class="ot">&lt;-</span> <span class="dv">1002</span></span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1" aria-label="code-block-23-5"></a>retrieval_time <span class="ot">&lt;-</span> <span class="dv">1102</span></span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1" aria-label="code-block-23-6"></a><span class="co"># Time is recorded numerically (1037 instead of 10:37), so need to change these columns:</span></span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1" aria-label="code-block-23-7"></a>deployment_time <span class="ot">&lt;-</span> <span class="fu">substr</span>(<span class="fu">as.POSIXct</span>(<span class="fu">sprintf</span>(<span class="st">"%04.0f"</span>, deployment_time), <span class="at">format =</span> <span class="st">"%H%M"</span>), <span class="dv">12</span>, <span class="dv">16</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1" aria-label="code-block-23-8"></a>retrieval_time <span class="ot">&lt;-</span> <span class="fu">substr</span>(<span class="fu">as.POSIXct</span>(<span class="fu">sprintf</span>(<span class="st">"%04.0f"</span>, retrieval_time, <span class="at">format =</span> <span class="st">"%H%M"</span>), <span class="dv">12</span>, <span class="dv">16</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1" aria-label="code-block-23-9"></a><span class="co"># If you're interested in just pasting the event dates together:</span></span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1" aria-label="code-block-23-10"></a>eventDate <span class="ot">&lt;-</span> <span class="fu">paste</span>(event_start, event_finish, <span class="at">sep =</span> <span class="st">"/"</span>) </span>
+<span id="cb23-11"><a href="#cb23-11" tabindex="-1" aria-label="code-block-23-11"></a><span class="co"># If you're interested in including the deployment and retrieval times in the eventDate:</span></span>
+<span id="cb23-12"><a href="#cb23-12" tabindex="-1" aria-label="code-block-23-12"></a>eventDateTime_start <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">format_ISO8601</span>(<span class="fu">as.POSIXct</span>(<span class="fu">paste</span>(event_start, deployment_time), <span class="at">tz =</span> <span class="st">"UTC"</span>))</span>
+<span id="cb23-13"><a href="#cb23-13" tabindex="-1" aria-label="code-block-23-13"></a>eventDateTime_start <span class="ot">&lt;-</span> <span class="fu">paste0</span>(eventDateTime_start, <span class="st">"Z"</span>)</span>
+<span id="cb23-14"><a href="#cb23-14" tabindex="-1" aria-label="code-block-23-14"></a>eventDateTime_finish <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">format_ISO8601</span>(<span class="fu">as.POSIXct</span>(<span class="fu">paste</span>(event_finish, retrieval_time), <span class="at">tz =</span> <span class="st">"UTC"</span>))</span>
+<span id="cb23-15"><a href="#cb23-15" tabindex="-1" aria-label="code-block-23-15"></a>eventDateTime_finish <span class="ot">&lt;-</span> <span class="fu">paste0</span>(eventDateTime_finish, <span class="st">"Z"</span>)</span>
+<span id="cb23-16"><a href="#cb23-16" tabindex="-1" aria-label="code-block-23-16"></a>eventDateTime <span class="ot">&lt;-</span> <span class="fu">paste</span>(eventDateTime_start, eventDateTime_finish, <span class="at">sep =</span> <span class="st">"/"</span>) </span>
+<span id="cb23-17"><a href="#cb23-17" tabindex="-1" aria-label="code-block-23-17"></a><span class="fu">print</span>(eventDate)</span>
+<span id="cb23-18"><a href="#cb23-18" tabindex="-1" aria-label="code-block-23-18"></a><span class="fu">print</span>(eventDateTime)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1477,19 +1470,19 @@ YouTube about using the tool.</p>
 <col width="50%">
 <col width="33%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Darwin Core Term</th>
 <th>Description</th>
 <th>Example</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/list/#dwc_scientificNameID" class="external-link">scientificNameID</a></td>
 <td>An identifier for the nomenclatural (not taxonomic) details of a
 scientific name.</td>
 <td><code>urn:lsid:ipni.org:names:37829-1:1.3</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://dwc.tdwg.org/list/#dwc_kingdom" class="external-link">kingdom</a></td>
 <td>The full scientific name of the kingdom in which the taxon is
 classified.</td>
@@ -1499,7 +1492,7 @@ classified.</td>
 <code>Protozoa</code>, <code>Viruses</code>
 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/list/#dwc_taxonRank" class="external-link">taxonRank</a></td>
 <td>The taxonomic rank of the most specific name in the
 scientificName.</td>
@@ -1601,39 +1594,39 @@ the user needs to evaluate which match is appropriate.</p>
 <div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a><span class="im">import</span> pyworms</span>
-<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a><span class="im">import</span> pprint</span>
-<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a></span>
-<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>fname <span class="op">=</span> <span class="st">'https://ioos.github.io/bio_mobilization_workshop/data/species.csv'</span></span>
-<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a></span>
-<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a><span class="co"># Read in the csv data to data frame</span></span>
-<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(fname)</span>
-<span id="cb27-9"><a href="#cb27-9" tabindex="-1"></a></span>
-<span id="cb27-10"><a href="#cb27-10" tabindex="-1"></a><span class="co"># Iterate row by row through the data frame and query worms for each ScientificName term.</span></span>
-<span id="cb27-11"><a href="#cb27-11" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> df.iterrows():</span>
-<span id="cb27-12"><a href="#cb27-12" tabindex="-1"></a>   resp <span class="op">=</span> pyworms.aphiaRecordsByMatchNames(row[<span class="st">'ORIGINAL_NAME'</span>], marine_only<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb27-13"><a href="#cb27-13" tabindex="-1"></a>   </span>
-<span id="cb27-14"><a href="#cb27-14" tabindex="-1"></a>   <span class="co"># When no matches are found, print the non-matching name and move on</span></span>
-<span id="cb27-15"><a href="#cb27-15" tabindex="-1"></a>   <span class="cf">if</span> <span class="bu">len</span>(resp[<span class="dv">0</span>]) <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb27-16"><a href="#cb27-16" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">No match for name "</span><span class="sc">{}</span><span class="st">"'</span>.<span class="bu">format</span>(row[<span class="st">'ORIGINAL_NAME'</span>]))</span>
-<span id="cb27-17"><a href="#cb27-17" tabindex="-1"></a>      <span class="cf">continue</span></span>
-<span id="cb27-18"><a href="#cb27-18" tabindex="-1"></a> </span>
-<span id="cb27-19"><a href="#cb27-19" tabindex="-1"></a>   <span class="co"># When more than 1 match is found, the user needs to take a look. But tell the user which one has multiple matches</span></span>
-<span id="cb27-20"><a href="#cb27-20" tabindex="-1"></a>   <span class="cf">elif</span> <span class="bu">len</span>(resp[<span class="dv">0</span>]) <span class="op">&gt;</span> <span class="dv">1</span>:</span>
-<span id="cb27-21"><a href="#cb27-21" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">Multiple matches for name "</span><span class="sc">{}</span><span class="st">":'</span>.<span class="bu">format</span>(row[<span class="st">'ORIGINAL_NAME'</span>]))</span>
-<span id="cb27-22"><a href="#cb27-22" tabindex="-1"></a>      pprint.pprint(resp[<span class="dv">0</span>], indent<span class="op">=</span><span class="dv">4</span>)</span>
-<span id="cb27-23"><a href="#cb27-23" tabindex="-1"></a>      <span class="cf">continue</span></span>
-<span id="cb27-24"><a href="#cb27-24" tabindex="-1"></a> </span>
-<span id="cb27-25"><a href="#cb27-25" tabindex="-1"></a>   <span class="co"># When only 1 match is found, put the appropriate information into the appropriate row and column</span></span>
-<span id="cb27-26"><a href="#cb27-26" tabindex="-1"></a>   <span class="cf">else</span>:</span>
-<span id="cb27-27"><a href="#cb27-27" tabindex="-1"></a>      worms <span class="op">=</span> resp[<span class="dv">0</span>][<span class="dv">0</span>]</span>
-<span id="cb27-28"><a href="#cb27-28" tabindex="-1"></a>      df.loc[index, <span class="st">'scientificNameID'</span>] <span class="op">=</span> worms[<span class="st">'lsid'</span>]</span>
-<span id="cb27-29"><a href="#cb27-29" tabindex="-1"></a>      df.loc[index, <span class="st">'taxonRank'</span>] <span class="op">=</span> worms[<span class="st">'rank'</span>]</span>
-<span id="cb27-30"><a href="#cb27-30" tabindex="-1"></a>      df.loc[index, <span class="st">'kingdom'</span>] <span class="op">=</span> worms[<span class="st">'kingdom'</span>]</span>
-<span id="cb27-31"><a href="#cb27-31" tabindex="-1"></a></span>
-<span id="cb27-32"><a href="#cb27-32" tabindex="-1"></a><span class="co"># print the first 10 rows</span></span>
-<span id="cb27-33"><a href="#cb27-33" tabindex="-1"></a>df.head()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" tabindex="-1" aria-label="code-block-27-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1" aria-label="code-block-27-2"></a><span class="im">import</span> pyworms</span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1" aria-label="code-block-27-3"></a><span class="im">import</span> pprint</span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1" aria-label="code-block-27-4"></a></span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1" aria-label="code-block-27-5"></a>fname <span class="op">=</span> <span class="st">'https://ioos.github.io/bio_mobilization_workshop/data/species.csv'</span></span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1" aria-label="code-block-27-6"></a></span>
+<span id="cb27-7"><a href="#cb27-7" tabindex="-1" aria-label="code-block-27-7"></a><span class="co"># Read in the csv data to data frame</span></span>
+<span id="cb27-8"><a href="#cb27-8" tabindex="-1" aria-label="code-block-27-8"></a>df <span class="op">=</span> pd.read_csv(fname)</span>
+<span id="cb27-9"><a href="#cb27-9" tabindex="-1" aria-label="code-block-27-9"></a></span>
+<span id="cb27-10"><a href="#cb27-10" tabindex="-1" aria-label="code-block-27-10"></a><span class="co"># Iterate row by row through the data frame and query worms for each ScientificName term.</span></span>
+<span id="cb27-11"><a href="#cb27-11" tabindex="-1" aria-label="code-block-27-11"></a><span class="cf">for</span> index, row <span class="kw">in</span> df.iterrows():</span>
+<span id="cb27-12"><a href="#cb27-12" tabindex="-1" aria-label="code-block-27-12"></a>   resp <span class="op">=</span> pyworms.aphiaRecordsByMatchNames(row[<span class="st">'ORIGINAL_NAME'</span>], marine_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb27-13"><a href="#cb27-13" tabindex="-1" aria-label="code-block-27-13"></a>   </span>
+<span id="cb27-14"><a href="#cb27-14" tabindex="-1" aria-label="code-block-27-14"></a>   <span class="co"># When no matches are found, print the non-matching name and move on</span></span>
+<span id="cb27-15"><a href="#cb27-15" tabindex="-1" aria-label="code-block-27-15"></a>   <span class="cf">if</span> <span class="bu">len</span>(resp[<span class="dv">0</span>]) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb27-16"><a href="#cb27-16" tabindex="-1" aria-label="code-block-27-16"></a>      <span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">No match for name "</span><span class="sc">{}</span><span class="st">"'</span>.<span class="bu">format</span>(row[<span class="st">'ORIGINAL_NAME'</span>]))</span>
+<span id="cb27-17"><a href="#cb27-17" tabindex="-1" aria-label="code-block-27-17"></a>      <span class="cf">continue</span></span>
+<span id="cb27-18"><a href="#cb27-18" tabindex="-1" aria-label="code-block-27-18"></a> </span>
+<span id="cb27-19"><a href="#cb27-19" tabindex="-1" aria-label="code-block-27-19"></a>   <span class="co"># When more than 1 match is found, the user needs to take a look. But tell the user which one has multiple matches</span></span>
+<span id="cb27-20"><a href="#cb27-20" tabindex="-1" aria-label="code-block-27-20"></a>   <span class="cf">elif</span> <span class="bu">len</span>(resp[<span class="dv">0</span>]) <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb27-21"><a href="#cb27-21" tabindex="-1" aria-label="code-block-27-21"></a>      <span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">Multiple matches for name "</span><span class="sc">{}</span><span class="st">":'</span>.<span class="bu">format</span>(row[<span class="st">'ORIGINAL_NAME'</span>]))</span>
+<span id="cb27-22"><a href="#cb27-22" tabindex="-1" aria-label="code-block-27-22"></a>      pprint.pprint(resp[<span class="dv">0</span>], indent<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb27-23"><a href="#cb27-23" tabindex="-1" aria-label="code-block-27-23"></a>      <span class="cf">continue</span></span>
+<span id="cb27-24"><a href="#cb27-24" tabindex="-1" aria-label="code-block-27-24"></a> </span>
+<span id="cb27-25"><a href="#cb27-25" tabindex="-1" aria-label="code-block-27-25"></a>   <span class="co"># When only 1 match is found, put the appropriate information into the appropriate row and column</span></span>
+<span id="cb27-26"><a href="#cb27-26" tabindex="-1" aria-label="code-block-27-26"></a>   <span class="cf">else</span>:</span>
+<span id="cb27-27"><a href="#cb27-27" tabindex="-1" aria-label="code-block-27-27"></a>      worms <span class="op">=</span> resp[<span class="dv">0</span>][<span class="dv">0</span>]</span>
+<span id="cb27-28"><a href="#cb27-28" tabindex="-1" aria-label="code-block-27-28"></a>      df.loc[index, <span class="st">'scientificNameID'</span>] <span class="op">=</span> worms[<span class="st">'lsid'</span>]</span>
+<span id="cb27-29"><a href="#cb27-29" tabindex="-1" aria-label="code-block-27-29"></a>      df.loc[index, <span class="st">'taxonRank'</span>] <span class="op">=</span> worms[<span class="st">'rank'</span>]</span>
+<span id="cb27-30"><a href="#cb27-30" tabindex="-1" aria-label="code-block-27-30"></a>      df.loc[index, <span class="st">'kingdom'</span>] <span class="op">=</span> worms[<span class="st">'kingdom'</span>]</span>
+<span id="cb27-31"><a href="#cb27-31" tabindex="-1" aria-label="code-block-27-31"></a></span>
+<span id="cb27-32"><a href="#cb27-32" tabindex="-1" aria-label="code-block-27-32"></a><span class="co"># print the first 10 rows</span></span>
+<span id="cb27-33"><a href="#cb27-33" tabindex="-1" aria-label="code-block-27-33"></a>df.head()</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1707,13 +1700,13 @@ values are latitude and which are longitude.</p>
 <col width="27%">
 <col width="34%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Darwin Core Term</th>
 <th>Description</th>
 <th>Example</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/list/#dwc_decimalLatitude" class="external-link">decimalLatitude</a></td>
 <td>The geographic latitude (in decimal degrees, using the spatial
 reference system given in geodeticDatum) of the geographic center of a
@@ -1721,7 +1714,7 @@ Location. Positive values are north of the Equator, negative values are
 south of it. Legal values lie between -90 and 90, inclusive.</td>
 <td><code>-41.0983423</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://dwc.tdwg.org/list/#dwc_decimalLongitude" class="external-link">decimalLongitude</a></td>
 <td>The geographic longitude (in decimal degrees, using the spatial
 reference system given in geodeticDatum) of the geographic center of a
@@ -1730,7 +1723,7 @@ values are west of it. Legal values lie between -180 and 180,
 inclusive.</td>
 <td><code>-121.1761111</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/list/#dwc_geodeticDatum" class="external-link">geodeticDatum</a></td>
 <td>The ellipsoid, geodetic datum, or spatial reference system (SRS)
 upon which the geographic coordinates given in decimalLatitude and
@@ -1785,24 +1778,24 @@ full strings <code>17° 51' 57.96" S</code>
 <div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'lat_degrees'</span>:[<span class="dv">17</span>],</span>
-<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>                   <span class="st">'lat_minutes'</span>:[<span class="dv">51</span>],</span>
-<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a>                   <span class="st">'lat_seconds'</span>:[<span class="fl">57.96</span>],</span>
-<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a>                   <span class="st">'lat_hemisphere'</span>:[<span class="st">'S'</span>],</span>
-<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>                   <span class="st">'lon_degrees'</span>: [<span class="dv">149</span>], </span>
-<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>                   <span class="st">'lon_minutes'</span>: [<span class="dv">39</span>], </span>
-<span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a>                   <span class="st">'lon_seconds'</span>:[<span class="fl">13.32</span>], </span>
-<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a>                   <span class="st">'lon_hemisphere'</span>: [<span class="st">'W'</span>],</span>
-<span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a>                  })</span>
-<span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a></span>
-<span id="cb29-11"><a href="#cb29-11" tabindex="-1"></a>df[<span class="st">'decimalLatitude'</span>] <span class="op">=</span> df[<span class="st">'lat_degrees'</span>] <span class="op">+</span> ( (df[<span class="st">'lat_minutes'</span>] <span class="op">+</span> (df[<span class="st">'lat_seconds'</span>]<span class="op">/</span><span class="dv">60</span>) )<span class="op">/</span><span class="dv">60</span>)</span>
-<span id="cb29-12"><a href="#cb29-12" tabindex="-1"></a>df[<span class="st">'decimalLongitude'</span>] <span class="op">=</span> df[<span class="st">'lon_degrees'</span>] <span class="op">+</span> ( (df[<span class="st">'lon_minutes'</span>] <span class="op">+</span> (df[<span class="st">'lon_seconds'</span>]<span class="op">/</span><span class="dv">60</span>) )<span class="op">/</span><span class="dv">60</span>)</span>
-<span id="cb29-13"><a href="#cb29-13" tabindex="-1"></a></span>
-<span id="cb29-14"><a href="#cb29-14" tabindex="-1"></a><span class="co"># Convert hemisphere S and W to negative values as units should be `degrees North` and `degrees East`</span></span>
-<span id="cb29-15"><a href="#cb29-15" tabindex="-1"></a>df.loc[df[<span class="st">'lat_hemisphere'</span>]<span class="op">==</span><span class="st">'S'</span>,<span class="st">'decimalLatitude'</span>] <span class="op">=</span> df.loc[df[<span class="st">'lat_hemisphere'</span>]<span class="op">==</span><span class="st">'S'</span>,<span class="st">'decimalLatitude'</span>]<span class="op">*-</span><span class="dv">1</span></span>
-<span id="cb29-16"><a href="#cb29-16" tabindex="-1"></a>df.loc[df[<span class="st">'lon_hemisphere'</span>]<span class="op">==</span><span class="st">'W'</span>,<span class="st">'decimalLongitude'</span>] <span class="op">=</span> df.loc[df[<span class="st">'lon_hemisphere'</span>]<span class="op">==</span><span class="st">'W'</span>,<span class="st">'decimalLongitude'</span>]<span class="op">*-</span><span class="dv">1</span></span>
-<span id="cb29-17"><a href="#cb29-17" tabindex="-1"></a></span>
-<span id="cb29-18"><a href="#cb29-18" tabindex="-1"></a>df[[<span class="st">'decimalLatitude'</span>,<span class="st">'decimalLongitude'</span>]]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" tabindex="-1" aria-label="code-block-29-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'lat_degrees'</span>:[<span class="dv">17</span>],</span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1" aria-label="code-block-29-2"></a>                   <span class="st">'lat_minutes'</span>:[<span class="dv">51</span>],</span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1" aria-label="code-block-29-3"></a>                   <span class="st">'lat_seconds'</span>:[<span class="fl">57.96</span>],</span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1" aria-label="code-block-29-4"></a>                   <span class="st">'lat_hemisphere'</span>:[<span class="st">'S'</span>],</span>
+<span id="cb29-5"><a href="#cb29-5" tabindex="-1" aria-label="code-block-29-5"></a>                   <span class="st">'lon_degrees'</span>: [<span class="dv">149</span>], </span>
+<span id="cb29-6"><a href="#cb29-6" tabindex="-1" aria-label="code-block-29-6"></a>                   <span class="st">'lon_minutes'</span>: [<span class="dv">39</span>], </span>
+<span id="cb29-7"><a href="#cb29-7" tabindex="-1" aria-label="code-block-29-7"></a>                   <span class="st">'lon_seconds'</span>:[<span class="fl">13.32</span>], </span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1" aria-label="code-block-29-8"></a>                   <span class="st">'lon_hemisphere'</span>: [<span class="st">'W'</span>],</span>
+<span id="cb29-9"><a href="#cb29-9" tabindex="-1" aria-label="code-block-29-9"></a>                  })</span>
+<span id="cb29-10"><a href="#cb29-10" tabindex="-1" aria-label="code-block-29-10"></a></span>
+<span id="cb29-11"><a href="#cb29-11" tabindex="-1" aria-label="code-block-29-11"></a>df[<span class="st">'decimalLatitude'</span>] <span class="op">=</span> df[<span class="st">'lat_degrees'</span>] <span class="op">+</span> ( (df[<span class="st">'lat_minutes'</span>] <span class="op">+</span> (df[<span class="st">'lat_seconds'</span>]<span class="op">/</span><span class="dv">60</span>) )<span class="op">/</span><span class="dv">60</span>)</span>
+<span id="cb29-12"><a href="#cb29-12" tabindex="-1" aria-label="code-block-29-12"></a>df[<span class="st">'decimalLongitude'</span>] <span class="op">=</span> df[<span class="st">'lon_degrees'</span>] <span class="op">+</span> ( (df[<span class="st">'lon_minutes'</span>] <span class="op">+</span> (df[<span class="st">'lon_seconds'</span>]<span class="op">/</span><span class="dv">60</span>) )<span class="op">/</span><span class="dv">60</span>)</span>
+<span id="cb29-13"><a href="#cb29-13" tabindex="-1" aria-label="code-block-29-13"></a></span>
+<span id="cb29-14"><a href="#cb29-14" tabindex="-1" aria-label="code-block-29-14"></a><span class="co"># Convert hemisphere S and W to negative values as units should be `degrees North` and `degrees East`</span></span>
+<span id="cb29-15"><a href="#cb29-15" tabindex="-1" aria-label="code-block-29-15"></a>df.loc[df[<span class="st">'lat_hemisphere'</span>]<span class="op">==</span><span class="st">'S'</span>,<span class="st">'decimalLatitude'</span>] <span class="op">=</span> df.loc[df[<span class="st">'lat_hemisphere'</span>]<span class="op">==</span><span class="st">'S'</span>,<span class="st">'decimalLatitude'</span>]<span class="op">*-</span><span class="dv">1</span></span>
+<span id="cb29-16"><a href="#cb29-16" tabindex="-1" aria-label="code-block-29-16"></a>df.loc[df[<span class="st">'lon_hemisphere'</span>]<span class="op">==</span><span class="st">'W'</span>,<span class="st">'decimalLongitude'</span>] <span class="op">=</span> df.loc[df[<span class="st">'lon_hemisphere'</span>]<span class="op">==</span><span class="st">'W'</span>,<span class="st">'decimalLongitude'</span>]<span class="op">*-</span><span class="dv">1</span></span>
+<span id="cb29-17"><a href="#cb29-17" tabindex="-1" aria-label="code-block-29-17"></a></span>
+<span id="cb29-18"><a href="#cb29-18" tabindex="-1" aria-label="code-block-29-18"></a>df[[<span class="st">'decimalLatitude'</span>,<span class="st">'decimalLongitude'</span>]]</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1817,22 +1810,22 @@ two strings into discrete components (as shown in the table).</li>
 <div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'lat_degrees'</span>:[<span class="dv">33</span>],</span>
-<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>                   <span class="st">'lat_dec_minutes'</span>:[<span class="fl">22.967</span>],</span>
-<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a>                   <span class="st">'lat_hemisphere'</span>:[<span class="st">'N'</span>],</span>
-<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a>                   <span class="st">'lon_degrees'</span>: [<span class="dv">117</span>], </span>
-<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a>                   <span class="st">'lon_dec_minutes'</span>: [<span class="fl">35.321</span>], </span>
-<span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a>                   <span class="st">'lon_hemisphere'</span>: [<span class="st">'W'</span>],</span>
-<span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a>                  })</span>
-<span id="cb31-8"><a href="#cb31-8" tabindex="-1"></a></span>
-<span id="cb31-9"><a href="#cb31-9" tabindex="-1"></a>df[<span class="st">'decimalLatitude'</span>] <span class="op">=</span> df[<span class="st">'lat_degrees'</span>] <span class="op">+</span> (df[<span class="st">'lat_dec_minutes'</span>]<span class="op">/</span><span class="dv">60</span>)</span>
-<span id="cb31-10"><a href="#cb31-10" tabindex="-1"></a>df[<span class="st">'decimalLongitude'</span>] <span class="op">=</span> df[<span class="st">'lon_degrees'</span>] <span class="op">+</span> (df[<span class="st">'lon_dec_minutes'</span>]<span class="op">/</span><span class="dv">60</span>)</span>
-<span id="cb31-11"><a href="#cb31-11" tabindex="-1"></a></span>
-<span id="cb31-12"><a href="#cb31-12" tabindex="-1"></a><span class="co"># Convert hemisphere S and W to negative values as units should be `degrees North` and `degrees East`</span></span>
-<span id="cb31-13"><a href="#cb31-13" tabindex="-1"></a>df.loc[df[<span class="st">'lat_hemisphere'</span>]<span class="op">==</span><span class="st">'S'</span>,<span class="st">'decimalLatitude'</span>] <span class="op">=</span> df.loc[df[<span class="st">'lat_hemisphere'</span>]<span class="op">==</span><span class="st">'S'</span>,<span class="st">'decimalLatitude'</span>]<span class="op">*-</span><span class="dv">1</span></span>
-<span id="cb31-14"><a href="#cb31-14" tabindex="-1"></a>df.loc[df[<span class="st">'lon_hemisphere'</span>]<span class="op">==</span><span class="st">'W'</span>,<span class="st">'decimalLongitude'</span>] <span class="op">=</span> df.loc[df[<span class="st">'lon_hemisphere'</span>]<span class="op">==</span><span class="st">'W'</span>,<span class="st">'decimalLongitude'</span>]<span class="op">*-</span><span class="dv">1</span></span>
-<span id="cb31-15"><a href="#cb31-15" tabindex="-1"></a></span>
-<span id="cb31-16"><a href="#cb31-16" tabindex="-1"></a>df[[<span class="st">'decimalLatitude'</span>,<span class="st">'decimalLongitude'</span>]]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" tabindex="-1" aria-label="code-block-31-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'lat_degrees'</span>:[<span class="dv">33</span>],</span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1" aria-label="code-block-31-2"></a>                   <span class="st">'lat_dec_minutes'</span>:[<span class="fl">22.967</span>],</span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1" aria-label="code-block-31-3"></a>                   <span class="st">'lat_hemisphere'</span>:[<span class="st">'N'</span>],</span>
+<span id="cb31-4"><a href="#cb31-4" tabindex="-1" aria-label="code-block-31-4"></a>                   <span class="st">'lon_degrees'</span>: [<span class="dv">117</span>], </span>
+<span id="cb31-5"><a href="#cb31-5" tabindex="-1" aria-label="code-block-31-5"></a>                   <span class="st">'lon_dec_minutes'</span>: [<span class="fl">35.321</span>], </span>
+<span id="cb31-6"><a href="#cb31-6" tabindex="-1" aria-label="code-block-31-6"></a>                   <span class="st">'lon_hemisphere'</span>: [<span class="st">'W'</span>],</span>
+<span id="cb31-7"><a href="#cb31-7" tabindex="-1" aria-label="code-block-31-7"></a>                  })</span>
+<span id="cb31-8"><a href="#cb31-8" tabindex="-1" aria-label="code-block-31-8"></a></span>
+<span id="cb31-9"><a href="#cb31-9" tabindex="-1" aria-label="code-block-31-9"></a>df[<span class="st">'decimalLatitude'</span>] <span class="op">=</span> df[<span class="st">'lat_degrees'</span>] <span class="op">+</span> (df[<span class="st">'lat_dec_minutes'</span>]<span class="op">/</span><span class="dv">60</span>)</span>
+<span id="cb31-10"><a href="#cb31-10" tabindex="-1" aria-label="code-block-31-10"></a>df[<span class="st">'decimalLongitude'</span>] <span class="op">=</span> df[<span class="st">'lon_degrees'</span>] <span class="op">+</span> (df[<span class="st">'lon_dec_minutes'</span>]<span class="op">/</span><span class="dv">60</span>)</span>
+<span id="cb31-11"><a href="#cb31-11" tabindex="-1" aria-label="code-block-31-11"></a></span>
+<span id="cb31-12"><a href="#cb31-12" tabindex="-1" aria-label="code-block-31-12"></a><span class="co"># Convert hemisphere S and W to negative values as units should be `degrees North` and `degrees East`</span></span>
+<span id="cb31-13"><a href="#cb31-13" tabindex="-1" aria-label="code-block-31-13"></a>df.loc[df[<span class="st">'lat_hemisphere'</span>]<span class="op">==</span><span class="st">'S'</span>,<span class="st">'decimalLatitude'</span>] <span class="op">=</span> df.loc[df[<span class="st">'lat_hemisphere'</span>]<span class="op">==</span><span class="st">'S'</span>,<span class="st">'decimalLatitude'</span>]<span class="op">*-</span><span class="dv">1</span></span>
+<span id="cb31-14"><a href="#cb31-14" tabindex="-1" aria-label="code-block-31-14"></a>df.loc[df[<span class="st">'lon_hemisphere'</span>]<span class="op">==</span><span class="st">'W'</span>,<span class="st">'decimalLongitude'</span>] <span class="op">=</span> df.loc[df[<span class="st">'lon_hemisphere'</span>]<span class="op">==</span><span class="st">'W'</span>,<span class="st">'decimalLongitude'</span>]<span class="op">*-</span><span class="dv">1</span></span>
+<span id="cb31-15"><a href="#cb31-15" tabindex="-1" aria-label="code-block-31-15"></a></span>
+<span id="cb31-16"><a href="#cb31-16" tabindex="-1" aria-label="code-block-31-16"></a>df[[<span class="st">'decimalLatitude'</span>,<span class="st">'decimalLongitude'</span>]]</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1860,7 +1853,7 @@ full strings <code>17° 51' 57.96" S</code>
 <col width="12%">
 <col width="13%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>lat_degrees</th>
 <th>lat_minutes</th>
 <th>lat_seconds</th>
@@ -1870,7 +1863,7 @@ full strings <code>17° 51' 57.96" S</code>
 <th>lon_seconds</th>
 <th>lon_hemisphere</th>
 </tr></thead>
-<tbody><tr class="odd">
+<tbody><tr>
 <td>17</td>
 <td>51</td>
 <td>57.96</td>
@@ -1884,24 +1877,24 @@ full strings <code>17° 51' 57.96" S</code>
 <div class="codewrapper sourceCode" id="cb33">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'lat_degrees'</span>:[<span class="dv">17</span>],</span>
-<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>                   <span class="st">'lat_minutes'</span>:[<span class="dv">51</span>],</span>
-<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a>                   <span class="st">'lat_seconds'</span>:[<span class="fl">57.96</span>],</span>
-<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a>                   <span class="st">'lat_hemisphere'</span>:[<span class="st">'S'</span>],</span>
-<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a>                   <span class="st">'lon_degrees'</span>: [<span class="dv">149</span>], </span>
-<span id="cb33-6"><a href="#cb33-6" tabindex="-1"></a>                   <span class="st">'lon_minutes'</span>: [<span class="dv">39</span>], </span>
-<span id="cb33-7"><a href="#cb33-7" tabindex="-1"></a>                   <span class="st">'lon_seconds'</span>:[<span class="fl">13.32</span>], </span>
-<span id="cb33-8"><a href="#cb33-8" tabindex="-1"></a>                   <span class="st">'lon_hemisphere'</span>: [<span class="st">'W'</span>],</span>
-<span id="cb33-9"><a href="#cb33-9" tabindex="-1"></a>                  })</span>
-<span id="cb33-10"><a href="#cb33-10" tabindex="-1"></a></span>
-<span id="cb33-11"><a href="#cb33-11" tabindex="-1"></a>df[<span class="st">'decimalLatitude'</span>] <span class="op">=</span> df[<span class="st">'lat_degrees'</span>] <span class="op">+</span> ( (df[<span class="st">'lat_minutes'</span>] <span class="op">+</span> (df[<span class="st">'lat_seconds'</span>]<span class="op">/</span><span class="dv">60</span>) )<span class="op">/</span><span class="dv">60</span>)</span>
-<span id="cb33-12"><a href="#cb33-12" tabindex="-1"></a>df[<span class="st">'decimalLongitude'</span>] <span class="op">=</span> df[<span class="st">'lon_degrees'</span>] <span class="op">+</span> ( (df[<span class="st">'lon_minutes'</span>] <span class="op">+</span> (df[<span class="st">'lon_seconds'</span>]<span class="op">/</span><span class="dv">60</span>) )<span class="op">/</span><span class="dv">60</span>)</span>
-<span id="cb33-13"><a href="#cb33-13" tabindex="-1"></a></span>
-<span id="cb33-14"><a href="#cb33-14" tabindex="-1"></a><span class="co"># Convert hemisphere S and W to negative values as units should be `degrees North` and `degrees East`</span></span>
-<span id="cb33-15"><a href="#cb33-15" tabindex="-1"></a>df.loc[df[<span class="st">'lat_hemisphere'</span>]<span class="op">==</span><span class="st">'S'</span>,<span class="st">'decimalLatitude'</span>] <span class="op">=</span> df.loc[df[<span class="st">'lat_hemisphere'</span>]<span class="op">==</span><span class="st">'S'</span>,<span class="st">'decimalLatitude'</span>]<span class="op">*-</span><span class="dv">1</span></span>
-<span id="cb33-16"><a href="#cb33-16" tabindex="-1"></a>df.loc[df[<span class="st">'lon_hemisphere'</span>]<span class="op">==</span><span class="st">'W'</span>,<span class="st">'decimalLongitude'</span>] <span class="op">=</span> df.loc[df[<span class="st">'lon_hemisphere'</span>]<span class="op">==</span><span class="st">'W'</span>,<span class="st">'decimalLongitude'</span>]<span class="op">*-</span><span class="dv">1</span></span>
-<span id="cb33-17"><a href="#cb33-17" tabindex="-1"></a></span>
-<span id="cb33-18"><a href="#cb33-18" tabindex="-1"></a>df[[<span class="st">'decimalLatitude'</span>,<span class="st">'decimalLongitude'</span>]]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" tabindex="-1" aria-label="code-block-33-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'lat_degrees'</span>:[<span class="dv">17</span>],</span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1" aria-label="code-block-33-2"></a>                   <span class="st">'lat_minutes'</span>:[<span class="dv">51</span>],</span>
+<span id="cb33-3"><a href="#cb33-3" tabindex="-1" aria-label="code-block-33-3"></a>                   <span class="st">'lat_seconds'</span>:[<span class="fl">57.96</span>],</span>
+<span id="cb33-4"><a href="#cb33-4" tabindex="-1" aria-label="code-block-33-4"></a>                   <span class="st">'lat_hemisphere'</span>:[<span class="st">'S'</span>],</span>
+<span id="cb33-5"><a href="#cb33-5" tabindex="-1" aria-label="code-block-33-5"></a>                   <span class="st">'lon_degrees'</span>: [<span class="dv">149</span>], </span>
+<span id="cb33-6"><a href="#cb33-6" tabindex="-1" aria-label="code-block-33-6"></a>                   <span class="st">'lon_minutes'</span>: [<span class="dv">39</span>], </span>
+<span id="cb33-7"><a href="#cb33-7" tabindex="-1" aria-label="code-block-33-7"></a>                   <span class="st">'lon_seconds'</span>:[<span class="fl">13.32</span>], </span>
+<span id="cb33-8"><a href="#cb33-8" tabindex="-1" aria-label="code-block-33-8"></a>                   <span class="st">'lon_hemisphere'</span>: [<span class="st">'W'</span>],</span>
+<span id="cb33-9"><a href="#cb33-9" tabindex="-1" aria-label="code-block-33-9"></a>                  })</span>
+<span id="cb33-10"><a href="#cb33-10" tabindex="-1" aria-label="code-block-33-10"></a></span>
+<span id="cb33-11"><a href="#cb33-11" tabindex="-1" aria-label="code-block-33-11"></a>df[<span class="st">'decimalLatitude'</span>] <span class="op">=</span> df[<span class="st">'lat_degrees'</span>] <span class="op">+</span> ( (df[<span class="st">'lat_minutes'</span>] <span class="op">+</span> (df[<span class="st">'lat_seconds'</span>]<span class="op">/</span><span class="dv">60</span>) )<span class="op">/</span><span class="dv">60</span>)</span>
+<span id="cb33-12"><a href="#cb33-12" tabindex="-1" aria-label="code-block-33-12"></a>df[<span class="st">'decimalLongitude'</span>] <span class="op">=</span> df[<span class="st">'lon_degrees'</span>] <span class="op">+</span> ( (df[<span class="st">'lon_minutes'</span>] <span class="op">+</span> (df[<span class="st">'lon_seconds'</span>]<span class="op">/</span><span class="dv">60</span>) )<span class="op">/</span><span class="dv">60</span>)</span>
+<span id="cb33-13"><a href="#cb33-13" tabindex="-1" aria-label="code-block-33-13"></a></span>
+<span id="cb33-14"><a href="#cb33-14" tabindex="-1" aria-label="code-block-33-14"></a><span class="co"># Convert hemisphere S and W to negative values as units should be `degrees North` and `degrees East`</span></span>
+<span id="cb33-15"><a href="#cb33-15" tabindex="-1" aria-label="code-block-33-15"></a>df.loc[df[<span class="st">'lat_hemisphere'</span>]<span class="op">==</span><span class="st">'S'</span>,<span class="st">'decimalLatitude'</span>] <span class="op">=</span> df.loc[df[<span class="st">'lat_hemisphere'</span>]<span class="op">==</span><span class="st">'S'</span>,<span class="st">'decimalLatitude'</span>]<span class="op">*-</span><span class="dv">1</span></span>
+<span id="cb33-16"><a href="#cb33-16" tabindex="-1" aria-label="code-block-33-16"></a>df.loc[df[<span class="st">'lon_hemisphere'</span>]<span class="op">==</span><span class="st">'W'</span>,<span class="st">'decimalLongitude'</span>] <span class="op">=</span> df.loc[df[<span class="st">'lon_hemisphere'</span>]<span class="op">==</span><span class="st">'W'</span>,<span class="st">'decimalLongitude'</span>]<span class="op">*-</span><span class="dv">1</span></span>
+<span id="cb33-17"><a href="#cb33-17" tabindex="-1" aria-label="code-block-33-17"></a></span>
+<span id="cb33-18"><a href="#cb33-18" tabindex="-1" aria-label="code-block-33-18"></a>df[[<span class="st">'decimalLatitude'</span>,<span class="st">'decimalLongitude'</span>]]</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1925,7 +1918,7 @@ two strings into discrete components (as shown in the table).</li>
 <col width="18%">
 <col width="16%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>lat_degrees</th>
 <th>lat_dec_minutes</th>
 <th>lat_hemisphere</th>
@@ -1933,7 +1926,7 @@ two strings into discrete components (as shown in the table).</li>
 <th>lon_dec_minutes</th>
 <th>lon_hemisphere</th>
 </tr></thead>
-<tbody><tr class="odd">
+<tbody><tr>
 <td>33</td>
 <td>22.967</td>
 <td>N</td>
@@ -1945,22 +1938,22 @@ two strings into discrete components (as shown in the table).</li>
 <div class="codewrapper sourceCode" id="cb35">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'lat_degrees'</span>:[<span class="dv">33</span>],</span>
-<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a>                   <span class="st">'lat_dec_minutes'</span>:[<span class="fl">22.967</span>],</span>
-<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a>                   <span class="st">'lat_hemisphere'</span>:[<span class="st">'N'</span>],</span>
-<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a>                   <span class="st">'lon_degrees'</span>: [<span class="dv">117</span>], </span>
-<span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a>                   <span class="st">'lon_dec_minutes'</span>: [<span class="fl">35.321</span>], </span>
-<span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a>                   <span class="st">'lon_hemisphere'</span>: [<span class="st">'W'</span>],</span>
-<span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a>                  })</span>
-<span id="cb35-8"><a href="#cb35-8" tabindex="-1"></a></span>
-<span id="cb35-9"><a href="#cb35-9" tabindex="-1"></a>df[<span class="st">'decimalLatitude'</span>] <span class="op">=</span> df[<span class="st">'lat_degrees'</span>] <span class="op">+</span> (df[<span class="st">'lat_dec_minutes'</span>]<span class="op">/</span><span class="dv">60</span>)</span>
-<span id="cb35-10"><a href="#cb35-10" tabindex="-1"></a>df[<span class="st">'decimalLongitude'</span>] <span class="op">=</span> df[<span class="st">'lon_degrees'</span>] <span class="op">+</span> (df[<span class="st">'lon_dec_minutes'</span>]<span class="op">/</span><span class="dv">60</span>)</span>
-<span id="cb35-11"><a href="#cb35-11" tabindex="-1"></a></span>
-<span id="cb35-12"><a href="#cb35-12" tabindex="-1"></a><span class="co"># Convert hemisphere S and W to negative values as units should be `degrees North` and `degrees East`</span></span>
-<span id="cb35-13"><a href="#cb35-13" tabindex="-1"></a>df.loc[df[<span class="st">'lat_hemisphere'</span>]<span class="op">==</span><span class="st">'S'</span>,<span class="st">'decimalLatitude'</span>] <span class="op">=</span> df.loc[df[<span class="st">'lat_hemisphere'</span>]<span class="op">==</span><span class="st">'S'</span>,<span class="st">'decimalLatitude'</span>]<span class="op">*-</span><span class="dv">1</span></span>
-<span id="cb35-14"><a href="#cb35-14" tabindex="-1"></a>df.loc[df[<span class="st">'lon_hemisphere'</span>]<span class="op">==</span><span class="st">'W'</span>,<span class="st">'decimalLongitude'</span>] <span class="op">=</span> df.loc[df[<span class="st">'lon_hemisphere'</span>]<span class="op">==</span><span class="st">'W'</span>,<span class="st">'decimalLongitude'</span>]<span class="op">*-</span><span class="dv">1</span></span>
-<span id="cb35-15"><a href="#cb35-15" tabindex="-1"></a></span>
-<span id="cb35-16"><a href="#cb35-16" tabindex="-1"></a>df[[<span class="st">'decimalLatitude'</span>,<span class="st">'decimalLongitude'</span>]]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" tabindex="-1" aria-label="code-block-35-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'lat_degrees'</span>:[<span class="dv">33</span>],</span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1" aria-label="code-block-35-2"></a>                   <span class="st">'lat_dec_minutes'</span>:[<span class="fl">22.967</span>],</span>
+<span id="cb35-3"><a href="#cb35-3" tabindex="-1" aria-label="code-block-35-3"></a>                   <span class="st">'lat_hemisphere'</span>:[<span class="st">'N'</span>],</span>
+<span id="cb35-4"><a href="#cb35-4" tabindex="-1" aria-label="code-block-35-4"></a>                   <span class="st">'lon_degrees'</span>: [<span class="dv">117</span>], </span>
+<span id="cb35-5"><a href="#cb35-5" tabindex="-1" aria-label="code-block-35-5"></a>                   <span class="st">'lon_dec_minutes'</span>: [<span class="fl">35.321</span>], </span>
+<span id="cb35-6"><a href="#cb35-6" tabindex="-1" aria-label="code-block-35-6"></a>                   <span class="st">'lon_hemisphere'</span>: [<span class="st">'W'</span>],</span>
+<span id="cb35-7"><a href="#cb35-7" tabindex="-1" aria-label="code-block-35-7"></a>                  })</span>
+<span id="cb35-8"><a href="#cb35-8" tabindex="-1" aria-label="code-block-35-8"></a></span>
+<span id="cb35-9"><a href="#cb35-9" tabindex="-1" aria-label="code-block-35-9"></a>df[<span class="st">'decimalLatitude'</span>] <span class="op">=</span> df[<span class="st">'lat_degrees'</span>] <span class="op">+</span> (df[<span class="st">'lat_dec_minutes'</span>]<span class="op">/</span><span class="dv">60</span>)</span>
+<span id="cb35-10"><a href="#cb35-10" tabindex="-1" aria-label="code-block-35-10"></a>df[<span class="st">'decimalLongitude'</span>] <span class="op">=</span> df[<span class="st">'lon_degrees'</span>] <span class="op">+</span> (df[<span class="st">'lon_dec_minutes'</span>]<span class="op">/</span><span class="dv">60</span>)</span>
+<span id="cb35-11"><a href="#cb35-11" tabindex="-1" aria-label="code-block-35-11"></a></span>
+<span id="cb35-12"><a href="#cb35-12" tabindex="-1" aria-label="code-block-35-12"></a><span class="co"># Convert hemisphere S and W to negative values as units should be `degrees North` and `degrees East`</span></span>
+<span id="cb35-13"><a href="#cb35-13" tabindex="-1" aria-label="code-block-35-13"></a>df.loc[df[<span class="st">'lat_hemisphere'</span>]<span class="op">==</span><span class="st">'S'</span>,<span class="st">'decimalLatitude'</span>] <span class="op">=</span> df.loc[df[<span class="st">'lat_hemisphere'</span>]<span class="op">==</span><span class="st">'S'</span>,<span class="st">'decimalLatitude'</span>]<span class="op">*-</span><span class="dv">1</span></span>
+<span id="cb35-14"><a href="#cb35-14" tabindex="-1" aria-label="code-block-35-14"></a>df.loc[df[<span class="st">'lon_hemisphere'</span>]<span class="op">==</span><span class="st">'W'</span>,<span class="st">'decimalLongitude'</span>] <span class="op">=</span> df.loc[df[<span class="st">'lon_hemisphere'</span>]<span class="op">==</span><span class="st">'W'</span>,<span class="st">'decimalLongitude'</span>]<span class="op">*-</span><span class="dv">1</span></span>
+<span id="cb35-15"><a href="#cb35-15" tabindex="-1" aria-label="code-block-35-15"></a></span>
+<span id="cb35-16"><a href="#cb35-16" tabindex="-1" aria-label="code-block-35-16"></a>df[[<span class="st">'decimalLatitude'</span>,<span class="st">'decimalLongitude'</span>]]</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2047,7 +2040,7 @@ strings for coordinates.</li>
 <col width="12%">
 <col width="13%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>lat_degrees</th>
 <th>lat_minutes</th>
 <th>lat_seconds</th>
@@ -2057,7 +2050,7 @@ strings for coordinates.</li>
 <th>lon_seconds</th>
 <th>lon_hemisphere</th>
 </tr></thead>
-<tbody><tr class="odd">
+<tbody><tr>
 <td>17</td>
 <td>51</td>
 <td>57.96</td>
@@ -2108,7 +2101,7 @@ strings for coordinates.</li>
 <col width="18%">
 <col width="16%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>lat_degrees</th>
 <th>lat_dec_minutes</th>
 <th>lat_hemisphere</th>
@@ -2116,7 +2109,7 @@ strings for coordinates.</li>
 <th>lon_dec_minutes</th>
 <th>lon_hemisphere</th>
 </tr></thead>
-<tbody><tr class="odd">
+<tbody><tr>
 <td>33</td>
 <td>22.967</td>
 <td>N</td>
@@ -2159,13 +2152,13 @@ package</a> the <code>conv_unit()</code> can work with space separated
 strings for coordinates.</li>
 </ul>
 <table class="table">
-<thead><tr class="header">
+<thead><tr>
 <th>lat</th>
 <th>lat_hemisphere</th>
 <th>lon</th>
 <th>lon_hemisphere</th>
 </tr></thead>
-<tbody><tr class="odd">
+<tbody><tr>
 <td>33 22.967</td>
 <td>N</td>
 <td>117 35.321</td>
@@ -2417,13 +2410,13 @@ data.</p>
 <col width="30%">
 <col width="26%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Darwin Core Term</th>
 <th>Description</th>
 <th>Example</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:eventID" class="external-link">eventID</a></td>
 <td>An identifier for the set of information associated with an Event
 (something that occurs at a place and time). May be a global unique
@@ -2433,7 +2426,7 @@ identifier or an identifier specific to the data set.</td>
 <br><code>FFS-216:2007-09-21:A:replicateID1024</code>
 </td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:occurrenceID" class="external-link">occurrenceID</a></td>
 <td>An identifier for the Occurrence (as opposed to a particular digital
 record of the occurrence). In the absence of a persistent global unique
@@ -2445,7 +2438,7 @@ unique.</td>
 <br><code>FFS-216:2007-09-21:A:replicateID1024:objectID1345330</code>
 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:measurementID" class="external-link">measurementID</a></td>
 <td>An identifier for the MeasurementOrFact (information pertaining to
 measurements, facts, characteristics, or assertions). May be a global
@@ -2499,7 +2492,7 @@ identifiers. Image credit: <a href="https://manual.obis.org/" class="external-li
   Event Core
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
 <div class="accordion-body">
 <table class="table">
 <colgroup>
@@ -2508,14 +2501,14 @@ identifiers. Image credit: <a href="https://manual.obis.org/" class="external-li
 <col width="35%">
 <col width="15%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Darwin Core Term</th>
 <th>Definition</th>
 <th>Comment</th>
 <th>Example</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:eventID" class="external-link"><code>eventID</code></a></td>
 <td>An identifier for the set of information associated with an Event
 (something that occurs at a place and time). May be a global unique
@@ -2529,7 +2522,7 @@ data.</td>
 <br><code>FFS-216:2007-09-21:A:replicateID1024</code>
 </td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:eventDate" class="external-link"><code>eventDate</code></a></td>
 <td>The date-time or interval during which an Event occurred. For
 occurrences, this is the date-time when the event was recorded. Not
@@ -2539,7 +2532,7 @@ suitable for a time in a geological context.</td>
 workshop.</td>
 <td><code>2009-02-20T08:40Z</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:decimalLatitude" class="external-link"><code>decimalLatitude</code></a></td>
 <td>The geographic latitude (in decimal degrees, using the spatial
 reference system given in geodeticDatum) of the geographic center of a
@@ -2553,7 +2546,7 @@ coordinates in the <a href="03-data-cleaning/index.html">Data
 Cleaning</a> section of the workshop.</td>
 <td><code>-41.0983423</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:decimalLongitude" class="external-link"><code>decimalLongitude</code></a></td>
 <td>The geographic longitude (in decimal degrees, using the spatial
 reference system given in geodeticDatum) of the geographic center of a
@@ -2565,7 +2558,7 @@ See more information on coordinates in the <a href="03-data-cleaning/index.html"
 workshop.</td>
 <td><code>-121.1761111</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:countryCode" class="external-link"><code>countryCode</code></a></td>
 <td>The standard code for the country in which the location occurs.</td>
 <td>Use an <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2" class="external-link">ISO
@@ -2573,7 +2566,7 @@ workshop.</td>
 this for their system.</td>
 <td><code>US</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwciri:geodeticDatum" class="external-link"><code>geodeticDatum</code></a></td>
 <td>The ellipsoid, geodetic datum, or spatial reference system (SRS)
 upon which the geographic coordinates given in decimalLatitude and
@@ -2596,7 +2589,7 @@ OBIS and GBIF but it’s best to state explicitly that it is.</td>
   Occurrence extension
   </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
 <div class="accordion-body">
 <table class="table">
 <colgroup>
@@ -2605,14 +2598,14 @@ OBIS and GBIF but it’s best to state explicitly that it is.</td>
 <col width="35%">
 <col width="15%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Darwin Core Term</th>
 <th>Definition</th>
 <th>Comment</th>
 <th>Example</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:eventID" class="external-link"><code>eventID</code></a></td>
 <td>An identifier for the set of information associated with an Event
 (something that occurs at a place and time). May be a global unique
@@ -2625,7 +2618,7 @@ correctly.</td>
 <br><code>FFS-216:2007-09-21:A:replicateID1024</code>
 </td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:occurrenceID" class="external-link"><code>occurrenceID</code></a></td>
 <td>An identifier for the Occurrence (as opposed to a particular digital
 record of the occurrence). In the absence of a persistent global unique
@@ -2638,7 +2631,7 @@ similar) but you’ll need to check this is unique for each row in your
 data.</td>
 <td><code>Station_95_Date_09JAN1997:14:35:00.000_Atractosteus_spatula</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:basisOfRecord" class="external-link"><code>basisOfRecord</code></a></td>
 <td>The specific nature of the data record.</td>
 <td>Pick from these controlled vocabulary terms: <a href="http://rs.tdwg.org/dwc/terms/HumanObservation" class="external-link">HumanObservation</a>,
@@ -2651,7 +2644,7 @@ data.</td>
 </td>
 <td><code>HumanObservation</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:scientificName" class="external-link"><code>scientificName</code></a></td>
 <td>The full scientific name, with authorship and date information if
 known. When forming part of an Identification, this should be the name
@@ -2662,7 +2655,7 @@ supplied in the <code>identificationQualifier</code> term.</td>
 <code>identificationQualifier</code> term.</td>
 <td><code>Atractosteus spatula</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:scientificNameID" class="external-link"><code>scientificNameID</code></a></td>
 <td>An identifier for the nomenclatural (not taxonomic) details of a
 scientific name.</td>
@@ -2670,7 +2663,7 @@ scientific name.</td>
 the end are the AphiaID from WoRMS.</td>
 <td><code>urn:lsid:marinespecies.org:taxname:218214</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:kingdom" class="external-link"><code>kingdom</code></a></td>
 <td>The full scientific name of the kingdom in which the taxon is
 classified.</td>
@@ -2678,7 +2671,7 @@ classified.</td>
 names that are the same but in different kingdoms.</td>
 <td><code>Animalia</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><a href="https://dwc.tdwg.org/terms/#dwc:occurrenceStatus" class="external-link"><code>occurrenceStatus</code></a></td>
 <td>A statement about the presence or absence of a Taxon at a
 Location.</td>
@@ -2700,7 +2693,7 @@ Location.</td>
   Extended Measurement or Fact Extension
   </h3>
 </button>
-<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
+<div id="collapseSpoiler3" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler3" aria-labelledby="headingSpoiler3">
 <div class="accordion-body">
 <p>Nothing is <em>required</em> from the OBIS perspective but if you are
 using this extension then <code>eventID</code> is required to be able to
@@ -2716,14 +2709,14 @@ below of the most relevant terms to be included in the eMoF table.</p>
 <col width="35%">
 <col width="15%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Darwin Core Term</th>
 <th>Definition</th>
 <th>Comment</th>
 <th>Example</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><code>eventID</code></td>
 <td>An identifier for the set of information associated with an Event
 (something that occurs at a place and time). May be a global unique
@@ -2736,7 +2729,7 @@ correctly.</td>
 <br><code>FFS-216:2007-09-21:A:replicateID1024</code>
 </td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>occurrenceID</code></td>
 <td>The identifier of the occurrence the measurement or fact refers to.
 If not applicable, it should be left empty.</td>
@@ -2747,7 +2740,7 @@ an occurrence like weight, length, abundance, etc.</td>
 <br><code>FFS-216:2007-09-21:A:replicateID1024:objectID1345330</code>
 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>measurementID</code></td>
 <td>An identifier for the MeasurementOrFact (information pertaining to
 measurements, facts, characteristics, or assertions). May be a global
@@ -2757,7 +2750,7 @@ be useful, especially if you would like a way to identify a specific
 measurement in the data</td>
 <td><code>9c752d22-b09a-11e8-96f8-529269fb1459</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>measurementType</code></td>
 <td>The nature of the measurement, fact, characteristic, or assertion.
 Recommended best practice is to use a controlled vocabulary.</td>
@@ -2766,7 +2759,7 @@ Recommended best practice is to use a controlled vocabulary.</td>
 <code>temperature</code><br><code>salinity</code><br><code>length</code><br><code>device type</code>
 </td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>measurementTypeID</code></td>
 <td>An identifier for the measurementType (global unique identifier,
 URI). The identifier should reference the measurementType in a
@@ -2917,33 +2910,33 @@ notebook</a> to see how it works.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Hmisc::describe </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># pull in the occurrence file from https://www.sciencebase.gov/catalog/item/53a887f4e4b075096c60cfdd</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://www.sciencebase.gov/catalog/file/get/53a887f4e4b075096c60cfdd?f=__disk__32%2F24%2F80%2F322480c9bcbad19030e29c9ec5e2caeb54cb4a08&amp;allowOpen=true"</span></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>occurrence <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(url)</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">head</span>(occurrence,<span class="at">n=</span><span class="dv">1</span>)       </span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  vernacularName                                eventID occurrenceStatus</span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="dv">1</span>  Alligator gar Station_95_Date_09JAN1997<span class="sc">:</span><span class="dv">14</span><span class="sc">:</span><span class="dv">35</span><span class="sc">:</span><span class="fl">00.000</span>           Absent</span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>     basisOfRecord       scientificName</span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="dv">1</span> HumanObservation Atractosteus spatula</span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>                           scientificNameID  kingdom   phylum       class</span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="dv">1</span> urn<span class="sc">:</span>lsid<span class="sc">:</span>marinespecies.org<span class="sc">:</span>taxname<span class="sc">:</span><span class="dv">279822</span> Animalia Chordata Actinopteri</span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>             order        family        genus scientificNameAuthorship</span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="dv">1</span> Lepisosteiformes Lepisosteidae <span class="fu">Atractosteus</span>        (LacepA<span class="st">"de, 1803)</span></span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="st">  taxonRank organismQuantity organismQuantityType</span></span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="st">1   Species                0   Relative Abundance</span></span>
-<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="st">                                                 occurrenceID</span></span>
-<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="st">1 Station_95_Date_09JAN1997:14:35:00.000_Atractosteus_spatula</span></span>
-<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="st">         collectionCode</span></span>
-<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="st">1 Aransas Bay Bag Seine</span></span>
-<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="st">Hmisc::describe(occurrence)</span></span></code></pre>
+<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="co"># pull in the occurrence file from https://www.sciencebase.gov/catalog/item/53a887f4e4b075096c60cfdd</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1" aria-label="code-block-1-2"></a>url <span class="ot">&lt;-</span> <span class="st">"https://www.sciencebase.gov/catalog/file/get/53a887f4e4b075096c60cfdd?f=__disk__32%2F24%2F80%2F322480c9bcbad19030e29c9ec5e2caeb54cb4a08&amp;allowOpen=true"</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1" aria-label="code-block-1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1" aria-label="code-block-1-4"></a>occurrence <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(url)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1" aria-label="code-block-1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1" aria-label="code-block-1-6"></a><span class="fu">head</span>(occurrence,<span class="at">n=</span><span class="dv">1</span>)       </span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1" aria-label="code-block-1-7"></a>  vernacularName                                eventID occurrenceStatus</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1" aria-label="code-block-1-8"></a><span class="dv">1</span>  Alligator gar Station_95_Date_09JAN1997<span class="sc">:</span><span class="dv">14</span><span class="sc">:</span><span class="dv">35</span><span class="sc">:</span><span class="fl">00.000</span>           Absent</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1" aria-label="code-block-1-9"></a>     basisOfRecord       scientificName</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1" aria-label="code-block-1-10"></a><span class="dv">1</span> HumanObservation Atractosteus spatula</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1" aria-label="code-block-1-11"></a>                           scientificNameID  kingdom   phylum       class</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1" aria-label="code-block-1-12"></a><span class="dv">1</span> urn<span class="sc">:</span>lsid<span class="sc">:</span>marinespecies.org<span class="sc">:</span>taxname<span class="sc">:</span><span class="dv">279822</span> Animalia Chordata Actinopteri</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1" aria-label="code-block-1-13"></a>             order        family        genus scientificNameAuthorship</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1" aria-label="code-block-1-14"></a><span class="dv">1</span> Lepisosteiformes Lepisosteidae <span class="fu">Atractosteus</span>        (LacepA<span class="st">"de, 1803)</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1" aria-label="code-block-1-15"></a><span class="st">  taxonRank organismQuantity organismQuantityType</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1" aria-label="code-block-1-16"></a><span class="st">1   Species                0   Relative Abundance</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1" aria-label="code-block-1-17"></a><span class="st">                                                 occurrenceID</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1" aria-label="code-block-1-18"></a><span class="st">1 Station_95_Date_09JAN1997:14:35:00.000_Atractosteus_spatula</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1" aria-label="code-block-1-19"></a><span class="st">         collectionCode</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1" aria-label="code-block-1-20"></a><span class="st">1 Aransas Bay Bag Seine</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1" aria-label="code-block-1-21"></a></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1" aria-label="code-block-1-22"></a><span class="st">Hmisc::describe(occurrence)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3118,25 +3111,27 @@ checks:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="tabs">
 <nav><div id="nav-tab-1" class="nav nav-tabs" role="tablist">
-
+<button class="nav-link active" id="nav-tab-1-1" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-1" type="button" role="tab" aria-controls="nav-tabpanel-1-1" aria-selected="true">
+  <h4 class="tab-header" id="nav-tab-heading-1-1">
+  R
+  </h4>
+</button>
+<button class="nav-link" id="nav-tab-1-2" data-bs-toggle="tab" data-bs-target="#nav-tabpanel-1-2" type="button" role="tab" aria-controls="nav-tabpanel-1-2" aria-selected="false">
+  <h4 class="tab-header" id="nav-tab-heading-1-2">
+  Python
+  </h4>
+</button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
 <div id="nav-tabpanel-1-1" class="tab-pane show active" aria-labelledby="nav-tab-1-1" role="tabpanel">
-
-</div>
-<div id="nav-tabpanel-1-2" class="tab-pane" aria-labelledby="nav-tab-1-2" role="tabpanel">
 <p>Install <a href="https://github.com/iobis/obistools" class="external-link">obistools</a> R
 packages. Use <a href="https://readxl.tidyverse.org/" class="external-link">readxl</a> package
 to read the Excel file.</p>
-</div>
-<div id="nav-tabpanel-1-3" class="tab-pane" aria-labelledby="nav-tab-1-3" role="tabpanel">
 <p>Run a diagnostics report for the data quality</p>
-</div>
-<div id="nav-tabpanel-1-4" class="tab-pane" aria-labelledby="nav-tab-1-4" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -3148,15 +3143,8 @@ to read the Excel file.</p>
 <span><span class="va">report</span> <span class="op">&lt;-</span> <span class="fu">obistools</span><span class="fu">::</span><span class="fu">report</span><span class="op">(</span><span class="va">trawl_fish</span><span class="op">)</span></span>
 <span><span class="va">report</span></span></code></pre>
 </div>
-</div>
-<div id="nav-tabpanel-1-5" class="tab-pane" aria-labelledby="nav-tab-1-5" role="tabpanel">
 <figure><img src="fig/screenshot_obistools_report.png" alt="drawing" class="figure mx-auto d-block"><div class="figcaption">drawing</div>
-</figure>
-</div>
-<div id="nav-tabpanel-1-6" class="tab-pane" aria-labelledby="nav-tab-1-6" role="tabpanel">
-<p>Check to make sure <code>eventID</code> are unique</p>
-</div>
-<div id="nav-tabpanel-1-7" class="tab-pane" aria-labelledby="nav-tab-1-7" role="tabpanel">
+</figure><p>Check to make sure <code>eventID</code> are unique</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -3164,8 +3152,6 @@ to read the Excel file.</p>
 <code class="sourceCode R"><span><span class="va">eventid</span> <span class="op">&lt;-</span> <span class="fu">obistools</span><span class="fu">::</span><span class="fu">check_eventids</span><span class="op">(</span><span class="va">trawl_fish</span><span class="op">)</span></span>
 <span><span class="fu">head</span><span class="op">(</span><span class="va">eventid</span><span class="op">)</span></span></code></pre>
 </div>
-</div>
-<div id="nav-tabpanel-1-8" class="tab-pane" aria-labelledby="nav-tab-1-8" role="tabpanel">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -3179,21 +3165,15 @@ to read the Excel file.</p>
  5 parentEventID error     3 parentEventID IYS:GoA2019:Stn3 has no corresponding eventID
  6 parentEventID error     4 parentEventID IYS:GoA2019:Stn4 has no corresponding eventID</code></pre>
 </div>
-</div>
-<div id="nav-tabpanel-1-9" class="tab-pane" aria-labelledby="nav-tab-1-9" role="tabpanel">
 <p>Check for proper <code>eventDate</code> to ensure they follow ISO
 8601 standards:
-<code>r     eventDate &lt;- obistools::check_eventdate(trawl_fish)     print(eventDate)</code>
-<code>output     # A tibble: 3 x 4      level   row field     message                                                             &lt;chr&gt; &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;                                                              1 error    10 eventDate eventDate 2019-02-24T07u40 does not seem to be a valid date        2 error    13 eventDate eventDate 2019-02-25 11h25min does not seem to be a valid date     3 error    15 eventDate eventDate 2019-26-2 does not seem to be a valid date</code></p>
-</div>
-<div id="nav-tabpanel-1-10" class="tab-pane" aria-labelledby="nav-tab-1-10" role="tabpanel">
+<code>r  eventDate &lt;- obistools::check_eventdate(trawl_fish)  print(eventDate)</code>
+<code>output  # A tibble: 3 x 4   level   row field     message                                                          &lt;chr&gt; &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;                                                           1 error    10 eventDate eventDate 2019-02-24T07u40 does not seem to be a valid date     2 error    13 eventDate eventDate 2019-02-25 11h25min does not seem to be a valid date  3 error    15 eventDate eventDate 2019-26-2 does not seem to be a valid date</code></p>
 <p>From the report generated under exercise 1, you can already see that
 there’s measurements made on land. This information can also be gathered
 by plotting the map separately or using the <code>check_onland()</code>
-or <code>check_depth()</code> functions in the <a href="https://iobis.github.io/obistools/" class="external-link">obistools</a> package.<br><code>r     depth &lt;- obistools::check_depth(trawl_fish)     onland &lt;- obistools::check_onland(trawl_fish) # Gives the same output.                print(depth)</code>
-<code>output     # A tibble: 1 x 16      eventID parentEventID eventDate  year month   day decimalLatitude decimalLongitude footprintWKT coordinateUncer~ minimumDepthInM~      &lt;chr&gt;   &lt;chr&gt;         &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;                   &lt;dbl&gt;            &lt;dbl&gt;     1 IYS:Go~ IYS:GoA2019:~ 2019-02-~  2019     2    22            67.4            -140. LINESTRING ~            2313.                0     # ... with 5 more variables: maximumDepthInMeters &lt;dbl&gt;, samplingProtocol &lt;chr&gt;, locality &lt;chr&gt;, locationID &lt;chr&gt;, type &lt;chr&gt;</code></p>
-</div>
-<div id="nav-tabpanel-1-11" class="tab-pane" aria-labelledby="nav-tab-1-11" role="tabpanel">
+or <code>check_depth()</code> functions in the <a href="https://iobis.github.io/obistools/" class="external-link">obistools</a> package.<br><code>r  depth &lt;- obistools::check_depth(trawl_fish)  onland &lt;- obistools::check_onland(trawl_fish) # Gives the same output.             print(depth)</code>
+<code>output  # A tibble: 1 x 16   eventID parentEventID eventDate  year month   day decimalLatitude decimalLongitude footprintWKT coordinateUncer~ minimumDepthInM~   &lt;chr&gt;   &lt;chr&gt;         &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;                   &lt;dbl&gt;            &lt;dbl&gt;  1 IYS:Go~ IYS:GoA2019:~ 2019-02-~  2019     2    22            67.4            -140. LINESTRING ~            2313.                0  # ... with 5 more variables: maximumDepthInMeters &lt;dbl&gt;, samplingProtocol &lt;chr&gt;, locality &lt;chr&gt;, locationID &lt;chr&gt;, type &lt;chr&gt;</code></p>
 <ol style="list-style-type: decimal">
 <li>
 <p>Run a diagnostics report for the data quality</p>
@@ -3236,106 +3216,91 @@ or <code>check_depth()</code> functions in the <a href="https://iobis.github.io/
 </li>
 <li><p>Check for proper <code>eventDate</code> to ensure they follow ISO
 8601 standards:
-<code>r     eventDate &lt;- obistools::check_eventdate(trawl_fish)     print(eventDate)</code>
-<code>output     # A tibble: 3 x 4      level   row field     message                                                             &lt;chr&gt; &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;                                                              1 error    10 eventDate eventDate 2019-02-24T07u40 does not seem to be a valid date        2 error    13 eventDate eventDate 2019-02-25 11h25min does not seem to be a valid date     3 error    15 eventDate eventDate 2019-26-2 does not seem to be a valid date</code></p></li>
+<code>r  eventDate &lt;- obistools::check_eventdate(trawl_fish)  print(eventDate)</code>
+<code>output  # A tibble: 3 x 4   level   row field     message                                                          &lt;chr&gt; &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;                                                           1 error    10 eventDate eventDate 2019-02-24T07u40 does not seem to be a valid date     2 error    13 eventDate eventDate 2019-02-25 11h25min does not seem to be a valid date  3 error    15 eventDate eventDate 2019-26-2 does not seem to be a valid date</code></p></li>
 <li><p>From the report generated under exercise 1, you can already see
 that there’s measurements made on land. This information can also be
 gathered by plotting the map separately or using the
 <code>check_onland()</code> or <code>check_depth()</code> functions in
 the <a href="https://iobis.github.io/obistools/" class="external-link">obistools</a>
-package.<br><code>r     depth &lt;- obistools::check_depth(trawl_fish)     onland &lt;- obistools::check_onland(trawl_fish) # Gives the same output.                print(depth)</code>
-<code>output     # A tibble: 1 x 16      eventID parentEventID eventDate  year month   day decimalLatitude decimalLongitude footprintWKT coordinateUncer~ minimumDepthInM~      &lt;chr&gt;   &lt;chr&gt;         &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;                   &lt;dbl&gt;            &lt;dbl&gt;     1 IYS:Go~ IYS:GoA2019:~ 2019-02-~  2019     2    22            67.4            -140. LINESTRING ~            2313.                0     # ... with 5 more variables: maximumDepthInMeters &lt;dbl&gt;, samplingProtocol &lt;chr&gt;, locality &lt;chr&gt;, locationID &lt;chr&gt;, type &lt;chr&gt;</code></p></li>
+package.<br><code>r  depth &lt;- obistools::check_depth(trawl_fish)  onland &lt;- obistools::check_onland(trawl_fish) # Gives the same output.             print(depth)</code>
+<code>output  # A tibble: 1 x 16   eventID parentEventID eventDate  year month   day decimalLatitude decimalLongitude footprintWKT coordinateUncer~ minimumDepthInM~   &lt;chr&gt;   &lt;chr&gt;         &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;                   &lt;dbl&gt;            &lt;dbl&gt;  1 IYS:Go~ IYS:GoA2019:~ 2019-02-~  2019     2    22            67.4            -140. LINESTRING ~            2313.                0  # ... with 5 more variables: maximumDepthInMeters &lt;dbl&gt;, samplingProtocol &lt;chr&gt;, locality &lt;chr&gt;, locationID &lt;chr&gt;, type &lt;chr&gt;</code></p></li>
 </ol>
 </div>
-<div id="nav-tabpanel-1-12" class="tab-pane" aria-labelledby="nav-tab-1-12" role="tabpanel">
+<div id="nav-tabpanel-1-2" class="tab-pane" aria-labelledby="nav-tab-1-2" role="tabpanel">
 <p>Install the <a href="https://pandas.pydata.org/" class="external-link">pandas</a>, <a href="https://scitools.org.uk/cartopy/docs/latest/installing.html" class="external-link">cartopy</a>,
 and <a href="https://geopandas.org/en/stable/" class="external-link">geopandas</a> Python
 packages. Use pandas to read the Excel file.</p>
-</div>
-<div id="nav-tabpanel-1-13" class="tab-pane" aria-labelledby="nav-tab-1-13" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://ioos.github.io/bio_mobilization_workshop/data/trawl_fish.xlsx'</span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>df <span class="op">=</span> pd.read_excel(url) <span class="co"># might need to install openpyxl</span></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>df[<span class="st">'row'</span>] <span class="op">=</span> df.index.to_numpy()<span class="op">+</span><span class="dv">1</span> <span class="co"># python starts at zero</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1" aria-label="code-block-9-2"></a>url <span class="op">=</span> <span class="st">'https://ioos.github.io/bio_mobilization_workshop/data/trawl_fish.xlsx'</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1" aria-label="code-block-9-3"></a>df <span class="op">=</span> pd.read_excel(url) <span class="co"># might need to install openpyxl</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1" aria-label="code-block-9-4"></a>df[<span class="st">'row'</span>] <span class="op">=</span> df.index.to_numpy()<span class="op">+</span><span class="dv">1</span> <span class="co"># python starts at zero</span></span></code></pre>
 </div>
-</div>
-<div id="nav-tabpanel-1-14" class="tab-pane" aria-labelledby="nav-tab-1-14" role="tabpanel">
 <p>Run a diagnostics report for the data quality.</p>
-</div>
-<div id="nav-tabpanel-1-15" class="tab-pane" aria-labelledby="nav-tab-1-15" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="im">import</span> cartopy.io.shapereader <span class="im">as</span> shpreader</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="im">import</span> shapely.geometry <span class="im">as</span> sgeom</span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="im">from</span> shapely.ops <span class="im">import</span> unary_union</span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="im">from</span> shapely.prepared <span class="im">import</span> prep</span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>gdf <span class="op">=</span> gpd.GeoDataFrame(df, geometry<span class="op">=</span>gpd.points_from_xy(df.decimalLongitude, df.decimalLatitude))</span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>land_shp_fname <span class="op">=</span> shpreader.natural_earth(resolution<span class="op">=</span><span class="st">'50m'</span>,</span>
-<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>                                       category<span class="op">=</span><span class="st">'physical'</span>, name<span class="op">=</span><span class="st">'land'</span>)</span>
-<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a></span>
-<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>land_geom <span class="op">=</span> unary_union(<span class="bu">list</span>(shpreader.Reader(land_shp_fname).geometries()))</span>
-<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>land <span class="op">=</span> prep(land_geom)</span>
-<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a></span>
-<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> gdf.iterrows():</span>
-<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>    gdf.loc[index, <span class="st">'on_land'</span>] <span class="op">=</span> land.contains(row.geometry)</span>
-<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a></span>
-<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(ncols<span class="op">=</span><span class="dv">1</span>,nrows<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a><span class="co"># Make a map:</span></span>
-<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a>xlim <span class="op">=</span> ([gdf.total_bounds[<span class="dv">0</span>]<span class="op">-</span><span class="dv">2</span>,  gdf.total_bounds[<span class="dv">2</span>]<span class="op">+</span><span class="dv">2</span>])</span>
-<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a>ylim <span class="op">=</span> ([gdf.total_bounds[<span class="dv">1</span>]<span class="op">-</span><span class="dv">2</span>,  gdf.total_bounds[<span class="dv">3</span>]<span class="op">+</span><span class="dv">2</span>])</span>
-<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a></span>
-<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a>axs[<span class="dv">0</span>].set_xlim(xlim)</span>
-<span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a>axs[<span class="dv">0</span>].set_ylim(ylim)</span>
-<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a></span>
-<span id="cb10-27"><a href="#cb10-27" tabindex="-1"></a>gpd.read_file(land_shp_fname).plot(ax<span class="op">=</span>axs[<span class="dv">0</span>])</span>
-<span id="cb10-28"><a href="#cb10-28" tabindex="-1"></a></span>
-<span id="cb10-29"><a href="#cb10-29" tabindex="-1"></a>gdf.loc[gdf[<span class="st">'on_land'</span>]<span class="op">==</span><span class="va">False</span>].plot(ax<span class="op">=</span>axs[<span class="dv">0</span>], color<span class="op">=</span><span class="st">'green'</span>, markersize<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb10-30"><a href="#cb10-30" tabindex="-1"></a>gdf.loc[gdf[<span class="st">'on_land'</span>]<span class="op">==</span><span class="va">True</span>].plot(ax<span class="op">=</span>axs[<span class="dv">0</span>], color<span class="op">=</span><span class="st">'red'</span>, markersize<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb10-31"><a href="#cb10-31" tabindex="-1"></a></span>
-<span id="cb10-32"><a href="#cb10-32" tabindex="-1"></a><span class="co"># Collect some informational material about potential issues w/ data:</span></span>
-<span id="cb10-33"><a href="#cb10-33" tabindex="-1"></a>invalid_coord <span class="op">=</span> []</span>
-<span id="cb10-34"><a href="#cb10-34" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(gdf.loc[gdf[<span class="st">'on_land'</span>]<span class="op">==</span><span class="va">True</span>]) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb10-35"><a href="#cb10-35" tabindex="-1"></a>   invalid_coord.append(<span class="st">'Row </span><span class="sc">{}</span><span class="st"> coordinates on land.'</span>.<span class="bu">format</span>(gdf.loc[gdf[<span class="st">'on_land'</span>] <span class="op">==</span> <span class="va">True</span>,<span class="st">'row'</span>].tolist()[<span class="dv">0</span>]))</span>
-<span id="cb10-36"><a href="#cb10-36" tabindex="-1"></a></span>
-<span id="cb10-37"><a href="#cb10-37" tabindex="-1"></a>req_cols <span class="op">=</span> [<span class="st">'eventDate'</span>, <span class="st">'decimalLongitude'</span>, <span class="st">'decimalLatitude'</span>, <span class="st">'scientificName'</span>, <span class="st">'scientificNameID'</span>, <span class="st">'occurrenceStatus'</span>, <span class="st">'basisOfRecord'</span>]</span>
-<span id="cb10-38"><a href="#cb10-38" tabindex="-1"></a>missing_cols <span class="op">=</span> []</span>
-<span id="cb10-39"><a href="#cb10-39" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> req_cols:</span>
-<span id="cb10-40"><a href="#cb10-40" tabindex="-1"></a> <span class="cf">if</span> col <span class="kw">not</span> <span class="kw">in</span> gdf.columns:</span>
-<span id="cb10-41"><a href="#cb10-41" tabindex="-1"></a>   missing_cols.append(<span class="st">'Column </span><span class="sc">{}</span><span class="st"> is missing.'</span>.<span class="bu">format</span>(col))</span>
-<span id="cb10-42"><a href="#cb10-42" tabindex="-1"></a></span>
-<span id="cb10-43"><a href="#cb10-43" tabindex="-1"></a><span class="co"># Add the information to the figure</span></span>
-<span id="cb10-44"><a href="#cb10-44" tabindex="-1"></a>axs[<span class="dv">1</span>].text(<span class="fl">0.25</span>,<span class="fl">0.25</span>,<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>.join([<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>.join(missing_cols),<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>.join(invalid_coord)]))</span>
-<span id="cb10-45"><a href="#cb10-45" tabindex="-1"></a>axs[<span class="dv">1</span>].axis(<span class="st">'off'</span>)</span>
-<span id="cb10-46"><a href="#cb10-46" tabindex="-1"></a>plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a><span class="im">import</span> cartopy.io.shapereader <span class="im">as</span> shpreader</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1" aria-label="code-block-10-2"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1" aria-label="code-block-10-3"></a><span class="im">import</span> shapely.geometry <span class="im">as</span> sgeom</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1" aria-label="code-block-10-4"></a><span class="im">from</span> shapely.ops <span class="im">import</span> unary_union</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1" aria-label="code-block-10-5"></a><span class="im">from</span> shapely.prepared <span class="im">import</span> prep</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1" aria-label="code-block-10-6"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1" aria-label="code-block-10-7"></a></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1" aria-label="code-block-10-8"></a>gdf <span class="op">=</span> gpd.GeoDataFrame(df, geometry<span class="op">=</span>gpd.points_from_xy(df.decimalLongitude, df.decimalLatitude))</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1" aria-label="code-block-10-9"></a></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1" aria-label="code-block-10-10"></a>land_shp_fname <span class="op">=</span> shpreader.natural_earth(resolution<span class="op">=</span><span class="st">'50m'</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1" aria-label="code-block-10-11"></a>                                       category<span class="op">=</span><span class="st">'physical'</span>, name<span class="op">=</span><span class="st">'land'</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1" aria-label="code-block-10-12"></a></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1" aria-label="code-block-10-13"></a>land_geom <span class="op">=</span> unary_union(<span class="bu">list</span>(shpreader.Reader(land_shp_fname).geometries()))</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1" aria-label="code-block-10-14"></a>land <span class="op">=</span> prep(land_geom)</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1" aria-label="code-block-10-15"></a></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1" aria-label="code-block-10-16"></a><span class="cf">for</span> index, row <span class="kw">in</span> gdf.iterrows():</span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1" aria-label="code-block-10-17"></a>    gdf.loc[index, <span class="st">'on_land'</span>] <span class="op">=</span> land.contains(row.geometry)</span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1" aria-label="code-block-10-18"></a></span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1" aria-label="code-block-10-19"></a>fig, axs <span class="op">=</span> plt.subplots(ncols<span class="op">=</span><span class="dv">1</span>,nrows<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1" aria-label="code-block-10-20"></a><span class="co"># Make a map:</span></span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1" aria-label="code-block-10-21"></a>xlim <span class="op">=</span> ([gdf.total_bounds[<span class="dv">0</span>]<span class="op">-</span><span class="dv">2</span>,  gdf.total_bounds[<span class="dv">2</span>]<span class="op">+</span><span class="dv">2</span>])</span>
+<span id="cb10-22"><a href="#cb10-22" tabindex="-1" aria-label="code-block-10-22"></a>ylim <span class="op">=</span> ([gdf.total_bounds[<span class="dv">1</span>]<span class="op">-</span><span class="dv">2</span>,  gdf.total_bounds[<span class="dv">3</span>]<span class="op">+</span><span class="dv">2</span>])</span>
+<span id="cb10-23"><a href="#cb10-23" tabindex="-1" aria-label="code-block-10-23"></a></span>
+<span id="cb10-24"><a href="#cb10-24" tabindex="-1" aria-label="code-block-10-24"></a>axs[<span class="dv">0</span>].set_xlim(xlim)</span>
+<span id="cb10-25"><a href="#cb10-25" tabindex="-1" aria-label="code-block-10-25"></a>axs[<span class="dv">0</span>].set_ylim(ylim)</span>
+<span id="cb10-26"><a href="#cb10-26" tabindex="-1" aria-label="code-block-10-26"></a></span>
+<span id="cb10-27"><a href="#cb10-27" tabindex="-1" aria-label="code-block-10-27"></a>gpd.read_file(land_shp_fname).plot(ax<span class="op">=</span>axs[<span class="dv">0</span>])</span>
+<span id="cb10-28"><a href="#cb10-28" tabindex="-1" aria-label="code-block-10-28"></a></span>
+<span id="cb10-29"><a href="#cb10-29" tabindex="-1" aria-label="code-block-10-29"></a>gdf.loc[gdf[<span class="st">'on_land'</span>]<span class="op">==</span><span class="va">False</span>].plot(ax<span class="op">=</span>axs[<span class="dv">0</span>], color<span class="op">=</span><span class="st">'green'</span>, markersize<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb10-30"><a href="#cb10-30" tabindex="-1" aria-label="code-block-10-30"></a>gdf.loc[gdf[<span class="st">'on_land'</span>]<span class="op">==</span><span class="va">True</span>].plot(ax<span class="op">=</span>axs[<span class="dv">0</span>], color<span class="op">=</span><span class="st">'red'</span>, markersize<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb10-31"><a href="#cb10-31" tabindex="-1" aria-label="code-block-10-31"></a></span>
+<span id="cb10-32"><a href="#cb10-32" tabindex="-1" aria-label="code-block-10-32"></a><span class="co"># Collect some informational material about potential issues w/ data:</span></span>
+<span id="cb10-33"><a href="#cb10-33" tabindex="-1" aria-label="code-block-10-33"></a>invalid_coord <span class="op">=</span> []</span>
+<span id="cb10-34"><a href="#cb10-34" tabindex="-1" aria-label="code-block-10-34"></a><span class="cf">if</span> <span class="bu">len</span>(gdf.loc[gdf[<span class="st">'on_land'</span>]<span class="op">==</span><span class="va">True</span>]) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb10-35"><a href="#cb10-35" tabindex="-1" aria-label="code-block-10-35"></a>   invalid_coord.append(<span class="st">'Row </span><span class="sc">{}</span><span class="st"> coordinates on land.'</span>.<span class="bu">format</span>(gdf.loc[gdf[<span class="st">'on_land'</span>] <span class="op">==</span> <span class="va">True</span>,<span class="st">'row'</span>].tolist()[<span class="dv">0</span>]))</span>
+<span id="cb10-36"><a href="#cb10-36" tabindex="-1" aria-label="code-block-10-36"></a></span>
+<span id="cb10-37"><a href="#cb10-37" tabindex="-1" aria-label="code-block-10-37"></a>req_cols <span class="op">=</span> [<span class="st">'eventDate'</span>, <span class="st">'decimalLongitude'</span>, <span class="st">'decimalLatitude'</span>, <span class="st">'scientificName'</span>, <span class="st">'scientificNameID'</span>, <span class="st">'occurrenceStatus'</span>, <span class="st">'basisOfRecord'</span>]</span>
+<span id="cb10-38"><a href="#cb10-38" tabindex="-1" aria-label="code-block-10-38"></a>missing_cols <span class="op">=</span> []</span>
+<span id="cb10-39"><a href="#cb10-39" tabindex="-1" aria-label="code-block-10-39"></a><span class="cf">for</span> col <span class="kw">in</span> req_cols:</span>
+<span id="cb10-40"><a href="#cb10-40" tabindex="-1" aria-label="code-block-10-40"></a> <span class="cf">if</span> col <span class="kw">not</span> <span class="kw">in</span> gdf.columns:</span>
+<span id="cb10-41"><a href="#cb10-41" tabindex="-1" aria-label="code-block-10-41"></a>   missing_cols.append(<span class="st">'Column </span><span class="sc">{}</span><span class="st"> is missing.'</span>.<span class="bu">format</span>(col))</span>
+<span id="cb10-42"><a href="#cb10-42" tabindex="-1" aria-label="code-block-10-42"></a></span>
+<span id="cb10-43"><a href="#cb10-43" tabindex="-1" aria-label="code-block-10-43"></a><span class="co"># Add the information to the figure</span></span>
+<span id="cb10-44"><a href="#cb10-44" tabindex="-1" aria-label="code-block-10-44"></a>axs[<span class="dv">1</span>].text(<span class="fl">0.25</span>,<span class="fl">0.25</span>,<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>.join([<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>.join(missing_cols),<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>.join(invalid_coord)]))</span>
+<span id="cb10-45"><a href="#cb10-45" tabindex="-1" aria-label="code-block-10-45"></a>axs[<span class="dv">1</span>].axis(<span class="st">'off'</span>)</span>
+<span id="cb10-46"><a href="#cb10-46" tabindex="-1" aria-label="code-block-10-46"></a>plt.show()</span></code></pre>
 </div>
-</div>
-<div id="nav-tabpanel-1-16" class="tab-pane" aria-labelledby="nav-tab-1-16" role="tabpanel">
 <figure><img src="fig/screenshot_python_report.png" alt="drawing" class="figure mx-auto d-block"><div class="figcaption">drawing</div>
-</figure>
-</div>
-<div id="nav-tabpanel-1-17" class="tab-pane" aria-labelledby="nav-tab-1-17" role="tabpanel">
-<p>Check to make sure <code>eventID</code> are unique</p>
-</div>
-<div id="nav-tabpanel-1-18" class="tab-pane" aria-labelledby="nav-tab-1-18" role="tabpanel">
+</figure><p>Check to make sure <code>eventID</code> are unique</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>dup_events <span class="op">=</span> df.loc[df[<span class="st">'eventID'</span>].duplicated()]</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Duplicated eventID:</span><span class="ch">\n</span><span class="st">'</span>,dup_events[[<span class="st">'eventID'</span>,<span class="st">'row'</span>]])</span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>parent_not_event <span class="op">=</span> df.loc[<span class="op">~</span>df[<span class="st">'eventID'</span>].isin(df[<span class="st">'parentEventID'</span>].unique())]</span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">parentEventID missing corresponding eventID:</span><span class="ch">\n</span><span class="st">'</span>, parent_not_event[[<span class="st">'parentEventID'</span>,<span class="st">'row'</span>]])</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1" aria-label="code-block-11-1"></a>dup_events <span class="op">=</span> df.loc[df[<span class="st">'eventID'</span>].duplicated()]</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1" aria-label="code-block-11-2"></a><span class="bu">print</span>(<span class="st">'Duplicated eventID:</span><span class="ch">\n</span><span class="st">'</span>,dup_events[[<span class="st">'eventID'</span>,<span class="st">'row'</span>]])</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1" aria-label="code-block-11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1" aria-label="code-block-11-4"></a>parent_not_event <span class="op">=</span> df.loc[<span class="op">~</span>df[<span class="st">'eventID'</span>].isin(df[<span class="st">'parentEventID'</span>].unique())]</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1" aria-label="code-block-11-5"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">parentEventID missing corresponding eventID:</span><span class="ch">\n</span><span class="st">'</span>, parent_not_event[[<span class="st">'parentEventID'</span>,<span class="st">'row'</span>]])</span></code></pre>
 </div>
-</div>
-<div id="nav-tabpanel-1-19" class="tab-pane" aria-labelledby="nav-tab-1-19" role="tabpanel">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -3359,56 +3324,46 @@ parentEventID missing corresponding eventID:
 63  IYS:GoA2019:Stn64   64
 [64 rows x 2 columns]</code></pre>
 </div>
-</div>
-<div id="nav-tabpanel-1-20" class="tab-pane" aria-labelledby="nav-tab-1-20" role="tabpanel">
 <p>Check for proper <code>eventDate</code> to ensure they follow ISO
 8601 standards:</p>
-</div>
-<div id="nav-tabpanel-1-21" class="tab-pane" aria-labelledby="nav-tab-1-21" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="cf">for</span> date <span class="kw">in</span> df[<span class="st">'eventDate'</span>]:</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>    <span class="cf">try</span>:</span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>        pd.to_datetime(date)</span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>    <span class="cf">except</span>:</span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Date"</span>,date,<span class="st">"might not follow ISO 8601"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1" aria-label="code-block-13-1"></a><span class="cf">for</span> date <span class="kw">in</span> df[<span class="st">'eventDate'</span>]:</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1" aria-label="code-block-13-2"></a>    <span class="cf">try</span>:</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1" aria-label="code-block-13-3"></a>        pd.to_datetime(date)</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1" aria-label="code-block-13-4"></a>    <span class="cf">except</span>:</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1" aria-label="code-block-13-5"></a>        <span class="bu">print</span>(<span class="st">"Date"</span>,date,<span class="st">"might not follow ISO 8601"</span>)</span></code></pre>
 </div>
-</div>
-<div id="nav-tabpanel-1-22" class="tab-pane" aria-labelledby="nav-tab-1-22" role="tabpanel">
 <p>From the report generated under exercise 1, you can already see that
 there’s measurements made on land. Now let’s check the depths are within
 reason for the points. Let’s use the <a href="https://coastwatch.pfeg.noaa.gov/erddap/griddap/GEBCO_2020.html" class="external-link">GEBCO
 bathymetry dataset served in the coastwatch ERDDAP</a>.</p>
-</div>
-<div id="nav-tabpanel-1-23" class="tab-pane" aria-labelledby="nav-tab-1-23" role="tabpanel">
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>df[<span class="st">'bathy'</span>] <span class="op">=</span> np.nan <span class="co"># initialize column</span></span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> df.iterrows():</span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>    base_url <span class="op">=</span> <span class="st">'https://coastwatch.pfeg.noaa.gov/erddap/griddap/GEBCO_2020.csvp?'</span></span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>    query_url <span class="op">=</span> <span class="st">'elevation%5B(</span><span class="sc">{}</span><span class="st">)%5D%5B(</span><span class="sc">{}</span><span class="st">)%5D'</span>.<span class="bu">format</span>(row[<span class="st">'decimalLatitude'</span>],row[<span class="st">'decimalLongitude'</span>])</span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>    url <span class="op">=</span> base_url<span class="op">+</span>query_url</span>
-<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>    bathy <span class="op">=</span> pd.read_csv(url)</span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>    df.at[index,<span class="st">'bathy'</span>] <span class="op">=</span> bathy[<span class="st">'elevation (m)'</span>] <span class="co"># insert bathymetry value</span></span>
-<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a>    time.sleep(<span class="fl">0.5</span>) <span class="co"># to not ping erddap too much</span></span>
-<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a></span>
-<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="co"># make new column for depth in meters as negative because GEBCO is Elevation relative to sea level</span></span>
-<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a>df[<span class="st">'neg_maximumDepthInMeters'</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">*</span>df[<span class="st">'maximumDepthInMeters'</span>]</span>
-<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a></span>
-<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'maximumDepthInMeters deeper than GEBCO bathymetry:'</span>)</span>
-<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>( df.loc[df[<span class="st">'neg_maximumDepthInMeters'</span>] <span class="op">&lt;</span> df[<span class="st">'bathy'</span>]] ) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a>   <span class="bu">print</span>(df.loc[df[<span class="st">'neg_maximumDepthInMeters'</span>] <span class="op">&lt;</span> df[<span class="st">'bathy'</span>]].T)</span>
-<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a>   <span class="bu">print</span>(<span class="st">'None'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1" aria-label="code-block-14-1"></a><span class="im">import</span> time</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1" aria-label="code-block-14-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1" aria-label="code-block-14-3"></a></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1" aria-label="code-block-14-4"></a>df[<span class="st">'bathy'</span>] <span class="op">=</span> np.nan <span class="co"># initialize column</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1" aria-label="code-block-14-5"></a></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1" aria-label="code-block-14-6"></a><span class="cf">for</span> index, row <span class="kw">in</span> df.iterrows():</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1" aria-label="code-block-14-7"></a>    base_url <span class="op">=</span> <span class="st">'https://coastwatch.pfeg.noaa.gov/erddap/griddap/GEBCO_2020.csvp?'</span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1" aria-label="code-block-14-8"></a>    query_url <span class="op">=</span> <span class="st">'elevation%5B(</span><span class="sc">{}</span><span class="st">)%5D%5B(</span><span class="sc">{}</span><span class="st">)%5D'</span>.<span class="bu">format</span>(row[<span class="st">'decimalLatitude'</span>],row[<span class="st">'decimalLongitude'</span>])</span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1" aria-label="code-block-14-9"></a>    url <span class="op">=</span> base_url<span class="op">+</span>query_url</span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1" aria-label="code-block-14-10"></a>    bathy <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1" aria-label="code-block-14-11"></a>    df.at[index,<span class="st">'bathy'</span>] <span class="op">=</span> bathy[<span class="st">'elevation (m)'</span>] <span class="co"># insert bathymetry value</span></span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1" aria-label="code-block-14-12"></a>    time.sleep(<span class="fl">0.5</span>) <span class="co"># to not ping erddap too much</span></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1" aria-label="code-block-14-13"></a></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1" aria-label="code-block-14-14"></a><span class="co"># make new column for depth in meters as negative because GEBCO is Elevation relative to sea level</span></span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1" aria-label="code-block-14-15"></a>df[<span class="st">'neg_maximumDepthInMeters'</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">*</span>df[<span class="st">'maximumDepthInMeters'</span>]</span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1" aria-label="code-block-14-16"></a></span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1" aria-label="code-block-14-17"></a><span class="bu">print</span>(<span class="st">'maximumDepthInMeters deeper than GEBCO bathymetry:'</span>)</span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1" aria-label="code-block-14-18"></a><span class="cf">if</span> <span class="bu">len</span>( df.loc[df[<span class="st">'neg_maximumDepthInMeters'</span>] <span class="op">&lt;</span> df[<span class="st">'bathy'</span>]] ) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb14-19"><a href="#cb14-19" tabindex="-1" aria-label="code-block-14-19"></a>   <span class="bu">print</span>(df.loc[df[<span class="st">'neg_maximumDepthInMeters'</span>] <span class="op">&lt;</span> df[<span class="st">'bathy'</span>]].T)</span>
+<span id="cb14-20"><a href="#cb14-20" tabindex="-1" aria-label="code-block-14-20"></a><span class="cf">else</span>:</span>
+<span id="cb14-21"><a href="#cb14-21" tabindex="-1" aria-label="code-block-14-21"></a>   <span class="bu">print</span>(<span class="st">'None'</span>)</span></code></pre>
 </div>
-</div>
-<div id="nav-tabpanel-1-24" class="tab-pane" aria-labelledby="nav-tab-1-24" role="tabpanel">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -3434,60 +3389,58 @@ row                                                                           5
 bathy                                                                     306.0
 neg_maximumDepthInMeters                                                  -33.2</code></pre>
 </div>
-</div>
-<div id="nav-tabpanel-1-25" class="tab-pane" aria-labelledby="nav-tab-1-25" role="tabpanel">
 <ol style="list-style-type: decimal">
 <li>
 <p>Run a diagnostics report for the data quality.</p>
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="im">import</span> cartopy.io.shapereader <span class="im">as</span> shpreader</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="im">import</span> shapely.geometry <span class="im">as</span> sgeom</span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="im">from</span> shapely.ops <span class="im">import</span> unary_union</span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="im">from</span> shapely.prepared <span class="im">import</span> prep</span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>gdf <span class="op">=</span> gpd.GeoDataFrame(df, geometry<span class="op">=</span>gpd.points_from_xy(df.decimalLongitude, df.decimalLatitude))</span>
-<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a>land_shp_fname <span class="op">=</span> shpreader.natural_earth(resolution<span class="op">=</span><span class="st">'50m'</span>,</span>
-<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a>                                       category<span class="op">=</span><span class="st">'physical'</span>, name<span class="op">=</span><span class="st">'land'</span>)</span>
-<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a></span>
-<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a>land_geom <span class="op">=</span> unary_union(<span class="bu">list</span>(shpreader.Reader(land_shp_fname).geometries()))</span>
-<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a>land <span class="op">=</span> prep(land_geom)</span>
-<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a></span>
-<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> gdf.iterrows():</span>
-<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a>    gdf.loc[index, <span class="st">'on_land'</span>] <span class="op">=</span> land.contains(row.geometry)</span>
-<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a></span>
-<span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(ncols<span class="op">=</span><span class="dv">1</span>,nrows<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb16-20"><a href="#cb16-20" tabindex="-1"></a><span class="co"># Make a map:</span></span>
-<span id="cb16-21"><a href="#cb16-21" tabindex="-1"></a>xlim <span class="op">=</span> ([gdf.total_bounds[<span class="dv">0</span>]<span class="op">-</span><span class="dv">2</span>,  gdf.total_bounds[<span class="dv">2</span>]<span class="op">+</span><span class="dv">2</span>])</span>
-<span id="cb16-22"><a href="#cb16-22" tabindex="-1"></a>ylim <span class="op">=</span> ([gdf.total_bounds[<span class="dv">1</span>]<span class="op">-</span><span class="dv">2</span>,  gdf.total_bounds[<span class="dv">3</span>]<span class="op">+</span><span class="dv">2</span>])</span>
-<span id="cb16-23"><a href="#cb16-23" tabindex="-1"></a></span>
-<span id="cb16-24"><a href="#cb16-24" tabindex="-1"></a>axs[<span class="dv">0</span>].set_xlim(xlim)</span>
-<span id="cb16-25"><a href="#cb16-25" tabindex="-1"></a>axs[<span class="dv">0</span>].set_ylim(ylim)</span>
-<span id="cb16-26"><a href="#cb16-26" tabindex="-1"></a></span>
-<span id="cb16-27"><a href="#cb16-27" tabindex="-1"></a>gpd.read_file(land_shp_fname).plot(ax<span class="op">=</span>axs[<span class="dv">0</span>])</span>
-<span id="cb16-28"><a href="#cb16-28" tabindex="-1"></a></span>
-<span id="cb16-29"><a href="#cb16-29" tabindex="-1"></a>gdf.loc[gdf[<span class="st">'on_land'</span>]<span class="op">==</span><span class="va">False</span>].plot(ax<span class="op">=</span>axs[<span class="dv">0</span>], color<span class="op">=</span><span class="st">'green'</span>, markersize<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb16-30"><a href="#cb16-30" tabindex="-1"></a>gdf.loc[gdf[<span class="st">'on_land'</span>]<span class="op">==</span><span class="va">True</span>].plot(ax<span class="op">=</span>axs[<span class="dv">0</span>], color<span class="op">=</span><span class="st">'red'</span>, markersize<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb16-31"><a href="#cb16-31" tabindex="-1"></a></span>
-<span id="cb16-32"><a href="#cb16-32" tabindex="-1"></a><span class="co"># Collect some informational material about potential issues w/ data:</span></span>
-<span id="cb16-33"><a href="#cb16-33" tabindex="-1"></a>invalid_coord <span class="op">=</span> []</span>
-<span id="cb16-34"><a href="#cb16-34" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(gdf.loc[gdf[<span class="st">'on_land'</span>]<span class="op">==</span><span class="va">True</span>]) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb16-35"><a href="#cb16-35" tabindex="-1"></a>   invalid_coord.append(<span class="st">'Row </span><span class="sc">{}</span><span class="st"> coordinates on land.'</span>.<span class="bu">format</span>(gdf.loc[gdf[<span class="st">'on_land'</span>] <span class="op">==</span> <span class="va">True</span>,<span class="st">'row'</span>].tolist()[<span class="dv">0</span>]))</span>
-<span id="cb16-36"><a href="#cb16-36" tabindex="-1"></a></span>
-<span id="cb16-37"><a href="#cb16-37" tabindex="-1"></a>req_cols <span class="op">=</span> [<span class="st">'eventDate'</span>, <span class="st">'decimalLongitude'</span>, <span class="st">'decimalLatitude'</span>, <span class="st">'scientificName'</span>, <span class="st">'scientificNameID'</span>, <span class="st">'occurrenceStatus'</span>, <span class="st">'basisOfRecord'</span>]</span>
-<span id="cb16-38"><a href="#cb16-38" tabindex="-1"></a>missing_cols <span class="op">=</span> []</span>
-<span id="cb16-39"><a href="#cb16-39" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> req_cols:</span>
-<span id="cb16-40"><a href="#cb16-40" tabindex="-1"></a> <span class="cf">if</span> col <span class="kw">not</span> <span class="kw">in</span> gdf.columns:</span>
-<span id="cb16-41"><a href="#cb16-41" tabindex="-1"></a>   missing_cols.append(<span class="st">'Column </span><span class="sc">{}</span><span class="st"> is missing.'</span>.<span class="bu">format</span>(col))</span>
-<span id="cb16-42"><a href="#cb16-42" tabindex="-1"></a></span>
-<span id="cb16-43"><a href="#cb16-43" tabindex="-1"></a><span class="co"># Add the information to the figure</span></span>
-<span id="cb16-44"><a href="#cb16-44" tabindex="-1"></a>axs[<span class="dv">1</span>].text(<span class="fl">0.25</span>,<span class="fl">0.25</span>,<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>.join([<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>.join(missing_cols),<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>.join(invalid_coord)]))</span>
-<span id="cb16-45"><a href="#cb16-45" tabindex="-1"></a>axs[<span class="dv">1</span>].axis(<span class="st">'off'</span>)</span>
-<span id="cb16-46"><a href="#cb16-46" tabindex="-1"></a>plt.show()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1" aria-label="code-block-16-1"></a><span class="im">import</span> cartopy.io.shapereader <span class="im">as</span> shpreader</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1" aria-label="code-block-16-2"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1" aria-label="code-block-16-3"></a><span class="im">import</span> shapely.geometry <span class="im">as</span> sgeom</span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1" aria-label="code-block-16-4"></a><span class="im">from</span> shapely.ops <span class="im">import</span> unary_union</span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1" aria-label="code-block-16-5"></a><span class="im">from</span> shapely.prepared <span class="im">import</span> prep</span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1" aria-label="code-block-16-6"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1" aria-label="code-block-16-7"></a></span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1" aria-label="code-block-16-8"></a>gdf <span class="op">=</span> gpd.GeoDataFrame(df, geometry<span class="op">=</span>gpd.points_from_xy(df.decimalLongitude, df.decimalLatitude))</span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1" aria-label="code-block-16-9"></a></span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1" aria-label="code-block-16-10"></a>land_shp_fname <span class="op">=</span> shpreader.natural_earth(resolution<span class="op">=</span><span class="st">'50m'</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1" aria-label="code-block-16-11"></a>                                       category<span class="op">=</span><span class="st">'physical'</span>, name<span class="op">=</span><span class="st">'land'</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1" aria-label="code-block-16-12"></a></span>
+<span id="cb16-13"><a href="#cb16-13" tabindex="-1" aria-label="code-block-16-13"></a>land_geom <span class="op">=</span> unary_union(<span class="bu">list</span>(shpreader.Reader(land_shp_fname).geometries()))</span>
+<span id="cb16-14"><a href="#cb16-14" tabindex="-1" aria-label="code-block-16-14"></a>land <span class="op">=</span> prep(land_geom)</span>
+<span id="cb16-15"><a href="#cb16-15" tabindex="-1" aria-label="code-block-16-15"></a></span>
+<span id="cb16-16"><a href="#cb16-16" tabindex="-1" aria-label="code-block-16-16"></a><span class="cf">for</span> index, row <span class="kw">in</span> gdf.iterrows():</span>
+<span id="cb16-17"><a href="#cb16-17" tabindex="-1" aria-label="code-block-16-17"></a>    gdf.loc[index, <span class="st">'on_land'</span>] <span class="op">=</span> land.contains(row.geometry)</span>
+<span id="cb16-18"><a href="#cb16-18" tabindex="-1" aria-label="code-block-16-18"></a></span>
+<span id="cb16-19"><a href="#cb16-19" tabindex="-1" aria-label="code-block-16-19"></a>fig, axs <span class="op">=</span> plt.subplots(ncols<span class="op">=</span><span class="dv">1</span>,nrows<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb16-20"><a href="#cb16-20" tabindex="-1" aria-label="code-block-16-20"></a><span class="co"># Make a map:</span></span>
+<span id="cb16-21"><a href="#cb16-21" tabindex="-1" aria-label="code-block-16-21"></a>xlim <span class="op">=</span> ([gdf.total_bounds[<span class="dv">0</span>]<span class="op">-</span><span class="dv">2</span>,  gdf.total_bounds[<span class="dv">2</span>]<span class="op">+</span><span class="dv">2</span>])</span>
+<span id="cb16-22"><a href="#cb16-22" tabindex="-1" aria-label="code-block-16-22"></a>ylim <span class="op">=</span> ([gdf.total_bounds[<span class="dv">1</span>]<span class="op">-</span><span class="dv">2</span>,  gdf.total_bounds[<span class="dv">3</span>]<span class="op">+</span><span class="dv">2</span>])</span>
+<span id="cb16-23"><a href="#cb16-23" tabindex="-1" aria-label="code-block-16-23"></a></span>
+<span id="cb16-24"><a href="#cb16-24" tabindex="-1" aria-label="code-block-16-24"></a>axs[<span class="dv">0</span>].set_xlim(xlim)</span>
+<span id="cb16-25"><a href="#cb16-25" tabindex="-1" aria-label="code-block-16-25"></a>axs[<span class="dv">0</span>].set_ylim(ylim)</span>
+<span id="cb16-26"><a href="#cb16-26" tabindex="-1" aria-label="code-block-16-26"></a></span>
+<span id="cb16-27"><a href="#cb16-27" tabindex="-1" aria-label="code-block-16-27"></a>gpd.read_file(land_shp_fname).plot(ax<span class="op">=</span>axs[<span class="dv">0</span>])</span>
+<span id="cb16-28"><a href="#cb16-28" tabindex="-1" aria-label="code-block-16-28"></a></span>
+<span id="cb16-29"><a href="#cb16-29" tabindex="-1" aria-label="code-block-16-29"></a>gdf.loc[gdf[<span class="st">'on_land'</span>]<span class="op">==</span><span class="va">False</span>].plot(ax<span class="op">=</span>axs[<span class="dv">0</span>], color<span class="op">=</span><span class="st">'green'</span>, markersize<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb16-30"><a href="#cb16-30" tabindex="-1" aria-label="code-block-16-30"></a>gdf.loc[gdf[<span class="st">'on_land'</span>]<span class="op">==</span><span class="va">True</span>].plot(ax<span class="op">=</span>axs[<span class="dv">0</span>], color<span class="op">=</span><span class="st">'red'</span>, markersize<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb16-31"><a href="#cb16-31" tabindex="-1" aria-label="code-block-16-31"></a></span>
+<span id="cb16-32"><a href="#cb16-32" tabindex="-1" aria-label="code-block-16-32"></a><span class="co"># Collect some informational material about potential issues w/ data:</span></span>
+<span id="cb16-33"><a href="#cb16-33" tabindex="-1" aria-label="code-block-16-33"></a>invalid_coord <span class="op">=</span> []</span>
+<span id="cb16-34"><a href="#cb16-34" tabindex="-1" aria-label="code-block-16-34"></a><span class="cf">if</span> <span class="bu">len</span>(gdf.loc[gdf[<span class="st">'on_land'</span>]<span class="op">==</span><span class="va">True</span>]) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb16-35"><a href="#cb16-35" tabindex="-1" aria-label="code-block-16-35"></a>   invalid_coord.append(<span class="st">'Row </span><span class="sc">{}</span><span class="st"> coordinates on land.'</span>.<span class="bu">format</span>(gdf.loc[gdf[<span class="st">'on_land'</span>] <span class="op">==</span> <span class="va">True</span>,<span class="st">'row'</span>].tolist()[<span class="dv">0</span>]))</span>
+<span id="cb16-36"><a href="#cb16-36" tabindex="-1" aria-label="code-block-16-36"></a></span>
+<span id="cb16-37"><a href="#cb16-37" tabindex="-1" aria-label="code-block-16-37"></a>req_cols <span class="op">=</span> [<span class="st">'eventDate'</span>, <span class="st">'decimalLongitude'</span>, <span class="st">'decimalLatitude'</span>, <span class="st">'scientificName'</span>, <span class="st">'scientificNameID'</span>, <span class="st">'occurrenceStatus'</span>, <span class="st">'basisOfRecord'</span>]</span>
+<span id="cb16-38"><a href="#cb16-38" tabindex="-1" aria-label="code-block-16-38"></a>missing_cols <span class="op">=</span> []</span>
+<span id="cb16-39"><a href="#cb16-39" tabindex="-1" aria-label="code-block-16-39"></a><span class="cf">for</span> col <span class="kw">in</span> req_cols:</span>
+<span id="cb16-40"><a href="#cb16-40" tabindex="-1" aria-label="code-block-16-40"></a> <span class="cf">if</span> col <span class="kw">not</span> <span class="kw">in</span> gdf.columns:</span>
+<span id="cb16-41"><a href="#cb16-41" tabindex="-1" aria-label="code-block-16-41"></a>   missing_cols.append(<span class="st">'Column </span><span class="sc">{}</span><span class="st"> is missing.'</span>.<span class="bu">format</span>(col))</span>
+<span id="cb16-42"><a href="#cb16-42" tabindex="-1" aria-label="code-block-16-42"></a></span>
+<span id="cb16-43"><a href="#cb16-43" tabindex="-1" aria-label="code-block-16-43"></a><span class="co"># Add the information to the figure</span></span>
+<span id="cb16-44"><a href="#cb16-44" tabindex="-1" aria-label="code-block-16-44"></a>axs[<span class="dv">1</span>].text(<span class="fl">0.25</span>,<span class="fl">0.25</span>,<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>.join([<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>.join(missing_cols),<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>.join(invalid_coord)]))</span>
+<span id="cb16-45"><a href="#cb16-45" tabindex="-1" aria-label="code-block-16-45"></a>axs[<span class="dv">1</span>].axis(<span class="st">'off'</span>)</span>
+<span id="cb16-46"><a href="#cb16-46" tabindex="-1" aria-label="code-block-16-46"></a>plt.show()</span></code></pre>
 </div>
 <figure><img src="fig/screenshot_python_report.png" alt="drawing" class="figure mx-auto d-block"><div class="figcaption">drawing</div>
 </figure>
@@ -3497,11 +3450,11 @@ neg_maximumDepthInMeters                                                  -33.2<
 <div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>dup_events <span class="op">=</span> df.loc[df[<span class="st">'eventID'</span>].duplicated()]</span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Duplicated eventID:</span><span class="ch">\n</span><span class="st">'</span>,dup_events[[<span class="st">'eventID'</span>,<span class="st">'row'</span>]])</span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>parent_not_event <span class="op">=</span> df.loc[<span class="op">~</span>df[<span class="st">'eventID'</span>].isin(df[<span class="st">'parentEventID'</span>].unique())]</span>
-<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">parentEventID missing corresponding eventID:</span><span class="ch">\n</span><span class="st">'</span>, parent_not_event[[<span class="st">'parentEventID'</span>,<span class="st">'row'</span>]])</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1" aria-label="code-block-17-1"></a>dup_events <span class="op">=</span> df.loc[df[<span class="st">'eventID'</span>].duplicated()]</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1" aria-label="code-block-17-2"></a><span class="bu">print</span>(<span class="st">'Duplicated eventID:</span><span class="ch">\n</span><span class="st">'</span>,dup_events[[<span class="st">'eventID'</span>,<span class="st">'row'</span>]])</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1" aria-label="code-block-17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1" aria-label="code-block-17-4"></a>parent_not_event <span class="op">=</span> df.loc[<span class="op">~</span>df[<span class="st">'eventID'</span>].isin(df[<span class="st">'parentEventID'</span>].unique())]</span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1" aria-label="code-block-17-5"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">parentEventID missing corresponding eventID:</span><span class="ch">\n</span><span class="st">'</span>, parent_not_event[[<span class="st">'parentEventID'</span>,<span class="st">'row'</span>]])</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3533,11 +3486,11 @@ parentEventID missing corresponding eventID:
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="cf">for</span> date <span class="kw">in</span> df[<span class="st">'eventDate'</span>]:</span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>    <span class="cf">try</span>:</span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>        pd.to_datetime(date)</span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>    <span class="cf">except</span>:</span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Date"</span>,date,<span class="st">"might not follow ISO 8601"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1" aria-label="code-block-19-1"></a><span class="cf">for</span> date <span class="kw">in</span> df[<span class="st">'eventDate'</span>]:</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1" aria-label="code-block-19-2"></a>    <span class="cf">try</span>:</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1" aria-label="code-block-19-3"></a>        pd.to_datetime(date)</span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1" aria-label="code-block-19-4"></a>    <span class="cf">except</span>:</span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1" aria-label="code-block-19-5"></a>        <span class="bu">print</span>(<span class="st">"Date"</span>,date,<span class="st">"might not follow ISO 8601"</span>)</span></code></pre>
 </div>
 </li>
 <li>
@@ -3548,27 +3501,27 @@ bathymetry dataset served in the coastwatch ERDDAP</a>.</p>
 <div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a>df[<span class="st">'bathy'</span>] <span class="op">=</span> np.nan <span class="co"># initialize column</span></span>
-<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="cf">for</span> index, row <span class="kw">in</span> df.iterrows():</span>
-<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>    base_url <span class="op">=</span> <span class="st">'https://coastwatch.pfeg.noaa.gov/erddap/griddap/GEBCO_2020.csvp?'</span></span>
-<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>    query_url <span class="op">=</span> <span class="st">'elevation%5B(</span><span class="sc">{}</span><span class="st">)%5D%5B(</span><span class="sc">{}</span><span class="st">)%5D'</span>.<span class="bu">format</span>(row[<span class="st">'decimalLatitude'</span>],row[<span class="st">'decimalLongitude'</span>])</span>
-<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a>    url <span class="op">=</span> base_url<span class="op">+</span>query_url</span>
-<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a>    bathy <span class="op">=</span> pd.read_csv(url)</span>
-<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a>    df.at[index,<span class="st">'bathy'</span>] <span class="op">=</span> bathy[<span class="st">'elevation (m)'</span>] <span class="co"># insert bathymetry value</span></span>
-<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a>    time.sleep(<span class="fl">0.5</span>) <span class="co"># to not ping erddap too much</span></span>
-<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a></span>
-<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a><span class="co"># make new column for depth in meters as negative because GEBCO is Elevation relative to sea level</span></span>
-<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a>df[<span class="st">'neg_maximumDepthInMeters'</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">*</span>df[<span class="st">'maximumDepthInMeters'</span>]</span>
-<span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a></span>
-<span id="cb20-17"><a href="#cb20-17" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'maximumDepthInMeters deeper than GEBCO bathymetry:'</span>)</span>
-<span id="cb20-18"><a href="#cb20-18" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>( df.loc[df[<span class="st">'neg_maximumDepthInMeters'</span>] <span class="op">&lt;</span> df[<span class="st">'bathy'</span>]] ) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb20-19"><a href="#cb20-19" tabindex="-1"></a>   <span class="bu">print</span>(df.loc[df[<span class="st">'neg_maximumDepthInMeters'</span>] <span class="op">&lt;</span> df[<span class="st">'bathy'</span>]].T)</span>
-<span id="cb20-20"><a href="#cb20-20" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb20-21"><a href="#cb20-21" tabindex="-1"></a>   <span class="bu">print</span>(<span class="st">'None'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1" aria-label="code-block-20-1"></a><span class="im">import</span> time</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1" aria-label="code-block-20-2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1" aria-label="code-block-20-3"></a></span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1" aria-label="code-block-20-4"></a>df[<span class="st">'bathy'</span>] <span class="op">=</span> np.nan <span class="co"># initialize column</span></span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1" aria-label="code-block-20-5"></a></span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1" aria-label="code-block-20-6"></a><span class="cf">for</span> index, row <span class="kw">in</span> df.iterrows():</span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1" aria-label="code-block-20-7"></a>    base_url <span class="op">=</span> <span class="st">'https://coastwatch.pfeg.noaa.gov/erddap/griddap/GEBCO_2020.csvp?'</span></span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1" aria-label="code-block-20-8"></a>    query_url <span class="op">=</span> <span class="st">'elevation%5B(</span><span class="sc">{}</span><span class="st">)%5D%5B(</span><span class="sc">{}</span><span class="st">)%5D'</span>.<span class="bu">format</span>(row[<span class="st">'decimalLatitude'</span>],row[<span class="st">'decimalLongitude'</span>])</span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1" aria-label="code-block-20-9"></a>    url <span class="op">=</span> base_url<span class="op">+</span>query_url</span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1" aria-label="code-block-20-10"></a>    bathy <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb20-11"><a href="#cb20-11" tabindex="-1" aria-label="code-block-20-11"></a>    df.at[index,<span class="st">'bathy'</span>] <span class="op">=</span> bathy[<span class="st">'elevation (m)'</span>] <span class="co"># insert bathymetry value</span></span>
+<span id="cb20-12"><a href="#cb20-12" tabindex="-1" aria-label="code-block-20-12"></a>    time.sleep(<span class="fl">0.5</span>) <span class="co"># to not ping erddap too much</span></span>
+<span id="cb20-13"><a href="#cb20-13" tabindex="-1" aria-label="code-block-20-13"></a></span>
+<span id="cb20-14"><a href="#cb20-14" tabindex="-1" aria-label="code-block-20-14"></a><span class="co"># make new column for depth in meters as negative because GEBCO is Elevation relative to sea level</span></span>
+<span id="cb20-15"><a href="#cb20-15" tabindex="-1" aria-label="code-block-20-15"></a>df[<span class="st">'neg_maximumDepthInMeters'</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">*</span>df[<span class="st">'maximumDepthInMeters'</span>]</span>
+<span id="cb20-16"><a href="#cb20-16" tabindex="-1" aria-label="code-block-20-16"></a></span>
+<span id="cb20-17"><a href="#cb20-17" tabindex="-1" aria-label="code-block-20-17"></a><span class="bu">print</span>(<span class="st">'maximumDepthInMeters deeper than GEBCO bathymetry:'</span>)</span>
+<span id="cb20-18"><a href="#cb20-18" tabindex="-1" aria-label="code-block-20-18"></a><span class="cf">if</span> <span class="bu">len</span>( df.loc[df[<span class="st">'neg_maximumDepthInMeters'</span>] <span class="op">&lt;</span> df[<span class="st">'bathy'</span>]] ) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb20-19"><a href="#cb20-19" tabindex="-1" aria-label="code-block-20-19"></a>   <span class="bu">print</span>(df.loc[df[<span class="st">'neg_maximumDepthInMeters'</span>] <span class="op">&lt;</span> df[<span class="st">'bathy'</span>]].T)</span>
+<span id="cb20-20"><a href="#cb20-20" tabindex="-1" aria-label="code-block-20-20"></a><span class="cf">else</span>:</span>
+<span id="cb20-21"><a href="#cb20-21" tabindex="-1" aria-label="code-block-20-21"></a>   <span class="bu">print</span>(<span class="st">'None'</span>)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3760,13 +3713,13 @@ the amount of time it takes to load the data into the IPT.</p>
 <col width="37%">
 <col width="25%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>EML Fields</th>
 <th>Definition</th>
 <th>Comment</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><code>Title</code></td>
 <td>A good descriptive title is indispensable and can provide the user
 with valuable information, making the discovery of data easier.</td>
@@ -3775,21 +3728,21 @@ as an identifier for the resource within the IPT installation and should
 be unique, descriptive and short (max. 100 characters). Spell out
 acronyms in Title but they are ok to use in the shortname.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>Abstract</code></td>
 <td>The abstract or description of a dataset provides basic information
 on the content of the dataset. The information in the abstract should
 improve understanding and interpretation of the data.</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>Data License</code></td>
 <td>The license that you apply to the resource. The license provides a
 standardized way to define appropriate uses of your work.</td>
 <td>Must use CC-0, CC-BY, or CC-BY-NC. Description of the licenses can
 be found <a href="https://manual.obis.org/policy.html#data-sharing-agreement" class="external-link">here</a>.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>Resource Contact(s)</code></td>
 <td>The list of people and organizations that should be contacted to get
 more information about the resource, that curate the resource or to whom
@@ -3798,20 +3751,20 @@ addressed.</td>
 <td>Last name, Position, and Organization are required, helpful to
 include an ORCID and a contact method like email or phone number.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>Resource Creator(s)</code></td>
 <td>The people and organizations who created the resource, in priority
 order. The list will be used to auto-generate the resource citation (if
 auto-generation is turned on).</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>Metadata Provider(s)</code></td>
 <td>the people and organizations responsible for producing the resource
 metadata.</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>Citation</code></td>
 <td>The dataset citation allows users to properly cite the datasets in
 further publications or other uses of the data. The OBIS download
@@ -3831,36 +3784,36 @@ in a zipped file.</td>
 <col width="25%">
 <col width="19%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>EML Fields</th>
 <th>Definition</th>
 <th>Comment</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><code>Bounding Box</code></td>
 <td>Farthest North, South, East, and West coordinate.</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>Geographic Description</code></td>
 <td>A textual description of the geographic coverage.</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>Temporal Coverage</code></td>
 <td>This can either be a Single Date, Date Range, Formation Period, or
 Living Time Period.</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>Study Extent</code></td>
 <td>This field represents both a specific sampling area and the sampling
 frequency (temporal boundaries, frequency of occurrence) of the
 project.</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>Sampling Description</code></td>
 <td>This field allows for a text-based/human readable description of the
 sampling procedures used in the research project.</td>
@@ -3868,7 +3821,7 @@ sampling procedures used in the research project.</td>
 sampling procedures found in the methods section of a journal
 article.</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>Step Description</code></td>
 <td>This field allows for repeated sets of elements that document a
 series of methods and procedures used in the study, and the processing
@@ -4039,15 +3992,17 @@ any links that you are not going to use.
 	
         | <a href="https://github.com/ioos/bio_mobilization_workshop/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/ioos/bio_mobilization_workshop/" class="external-link">Source</a></p>
-				<p><a href="https://github.com/ioos/bio_mobilization_workshop/blob/main/CITATION.cff" class="external-link">Cite</a> | <a href="mailto:https://obis.org/contact/" class="external-link">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
-			</div>
-			<div class="col-md-6">
+        <p>
+        <a href="https://github.com/ioos/bio_mobilization_workshop/blob/main/" class="external-link">Cite</a>
+        | <a href="mailto:https://obis.org/contact/" class="external-link">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
+		</div>
+		<div class="col-md-6">
 
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.17.1" class="external-link">sandpaper (0.17.1)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.7" class="external-link">varnish (1.0.7)</a></p>
-			</div>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.20.2" class="external-link">sandpaper (0.20.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.1.1" class="external-link">varnish (1.1.1)</a></p>
+		</div>
 		</footer>
 </div> <!-- / div.container -->
 	<div id="to-top">
@@ -4069,8 +4024,8 @@ any links that you are not going to use.
   "url": "https://ioos.github.io/bio_mobilization_workshop/aio.html",
   "identifier": "https://ioos.github.io/bio_mobilization_workshop/aio.html",
   "dateCreated": "2024-04-19",
-  "dateModified": "2025-12-02",
-  "datePublished": "2025-12-02"
+  "dateModified": "2026-06-16",
+  "datePublished": "2026-06-16"
 }
 
   </script><script>
