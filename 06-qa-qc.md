@@ -12,13 +12,13 @@ exercises: 120
 
 :::::::::::: objectives
 
-- "Data enhancement and quality control"
+- Quality control and enhance your data
 
 :::::::::::::::::::::::
 
 ## Data enhancement and quality control
 
-OBIS performs a number of quality checks on the data it receives. Red quality flags are attached to occurrence records if errors are encountered, and records may also be rejected if they do not meet minimum requirements. The checks that OBIS performs are documented [here](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4309024/pdf/bau125.pdf) and a python implementation is available [here](https://github.com/iobis/obis-qc). Therefore, prior to publishing your data to OBIS and/or GBIF, it is important to perform quality control on your standardized data. This can help identify any outliers or "faulty" data. It will also help with ensuring that your data is compatible and interoperable with other datasets published to OBIS. There are numerous functions within the [obistools](https://github.com/iobis/obistools) R packages that can serve to identify outliers, inspect quality or ensure that the dataset structure fits the required format for both the Event and Occurrence tables. 
+OBIS performs a number of quality checks on the data it receives. Red quality flags are attached to occurrence records if errors are encountered, and records may also be rejected if they do not meet minimum requirements. The checks that OBIS performs are documented [here](https://github.com/iobis/obis-qc), and those that EurOBIS also implements are published in [Vandepitte et al. 2015](https://pmc.ncbi.nlm.nih.gov/articles/PMC4309024/pdf/bau125.pdf). Therefore, prior to publishing your data to OBIS and/or GBIF, it is important to perform quality control on your standardized data. This can help identify any outliers or "faulty" data. It will also help with ensuring that your data is compatible and interoperable with other datasets published to OBIS. There are numerous functions within the [obistools](https://github.com/iobis/obistools) R packages that can serve to identify outliers, inspect quality or ensure that the dataset structure fits the required format for both the Event and Occurrence tables. 
 
 :::::::::::: callout
 
@@ -30,7 +30,7 @@ OBIS performs a number of quality checks on the data it receives. Red quality fl
 * Look at unique values of columns containing string entries to identify potential issues (eg. spelling). 
 * Check for uniqueness of `occurrenceID` field.
 * Check for uniqueness of `eventID` for each event, if applicable. 
-* Check that dates are following [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601).
+* Check that dates are following [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
 * Check that the `scientificNameID` is/are valid. 
 
 ::::::::::::::::::::
@@ -218,7 +218,7 @@ Perform the following minimal quality assurance and control checks:
  
 1. Run a diagnostics report for the data quality. 
 1. Ensure that the eventIDs are unique. 
-1. Make sure that the eventDates follow ISO-8601 standards. 
+1. Make sure that the eventDates follow ISO 8601 standards. 
 1. Determine whether reported depths are accurate. 
  
 The event core data used in the checks below can be found in [this Excel file](data/trawl_fish.xlsx).
@@ -227,7 +227,7 @@ The event core data used in the checks below can be found in [this Excel file](d
 
 ::::::::::::::::: tab
 
-#### R
+### R
 
 Install [obistools](https://github.com/iobis/obistools) R packages. 
 Use [readxl](https://readxl.tidyverse.org/) package to read the Excel file.
@@ -289,7 +289,7 @@ Use [readxl](https://readxl.tidyverse.org/) package to read the Excel file.
     # ... with 5 more variables: maximumDepthInMeters <dbl>, samplingProtocol <chr>, locality <chr>, locationID <chr>, type <chr>    
     ```    
 
-#### Python
+### Python
 
 Install the [pandas](https://pandas.pydata.org/), 
 [cartopy](https://scitools.org.uk/cartopy/docs/latest/installing.html), and 

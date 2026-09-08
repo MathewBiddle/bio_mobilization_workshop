@@ -21,10 +21,9 @@ exercises: 120
 
 ## Data Publishing Pipeline
 
- After going through QAQC and being standardized to Darwin Core, the dataset are uploaded to an IPT.  
- Metadata is added in the form of EML and the dataset published as a Darwin Core Archive (DwC-A).  The data are then 
- pushed to central OBIS.  Each dataset also has the option of being pushed to GBIF by registering the resource with 
- GBIF in the IPT.  
+ After going through QA/QC and being standardized to Darwin Core, the dataset is uploaded to an Integrated Publishing Toolkit (IPT, detailed below).  
+ Metadata is added in the form of Ecological Metadata Lanugage (EML) and the dataset is published as a Darwin Core Archive (DwC-A).  The data are then 
+ pushed to central OBIS. Each dataset also has the option of being pushed to GBIF by registering the resource with GBIF in the IPT.  
 
 ![Image by Enrique Montes](fig/DwC_workflow.jpg)
 
@@ -43,8 +42,7 @@ easy to share four types of biodiversity-related information:
 
 GBIF maintains a very detailed [IPT manual](https://ipt.gbif.org/manual/en/ipt/latest/) and the 
 [OBIS Manual](https://manual.obis.org/data_publication.html) offers OBIS-specific details on publishing through the IPT. 
-You can choose to download and install your own instance of the IPT but it might be complicated to register it with 
-OBIS. Instead it's recommended to work with one of the OBIS nodes to publish your data through their IPT. 
+It's recommended to work with one of the OBIS nodes to publish your data through their IPT. 
 [OBIS nodes](https://obis.org/contact/) publish data that are logical for their region or theme. After publishing the 
 data through their IPT the data are harvested by central OBIS.
 
@@ -58,10 +56,10 @@ The requirements for publishing via an OBIS node IPT are that:
 
 Both OBIS and GBIF use [Ecological Metadata Language (EML)](https://eml.ecoinformatics.org/) as the metadata standard 
 associated with the data. For the purposes of this workshop we will not dive into the world of EML. However, we should 
-note that when publishing your data through the IPT, the IPT helps you create an EML file as part of the DwC-A. As such, 
+note that when publishing your data through the IPT, the IPT helps you create an EML file as part of the DwC-A through a form-like interface. As such, 
 if you publish your own data through the IPT, there is no need for innate knowledge on the EML format. But there are a 
 minimum required number of fields that would need to be filled out in the IPT: `title`, `abstract`, `citation`, and 
-several `contacts`. 
+several `contacts`. We  highly recommend also including relevant keywords (e.g. about Essential Ocean Variables) and identifiers associated with your project.
 
 More information on EML can be found at the [EML standard page](https://eml.ecoinformatics.org/), and in the 
 [bio data guide](https://ioos.github.io/bio_data_guide/extras.html#ecological-metadata-language-eml). There are also a 
@@ -98,9 +96,11 @@ _Best practices for these fields are explained in detail in the [OBIS manual](ht
 | `Bounding Box`           | Farthest North, South, East, and West coordinate. |  |
 | `Geographic Description` | A textual description of the geographic coverage.  |  |
 | `Temporal Coverage`      | This can either be a Single Date, Date Range, Formation Period, or Living Time Period. |  |
+| `Keywords`               | A list of keywords obtained from a thesaurus or controlled vocabulary collection. | This field can help others find your dataset more easily. |
 | `Study Extent`           | This field represents both a specific sampling area and the sampling frequency (temporal boundaries, frequency of occurrence) of the project. |  |
 | `Sampling Description`   | This field allows for a text-based/human readable description of the sampling procedures used in the research project. | The content of this element would be similar to a description of sampling procedures found in the methods section of a journal article.  |
 | `Step Description`       | This field allows for repeated sets of elements that document a series of methods and procedures used in the study, and the processing steps leading to the production of the data files. These include e.g. text descriptions of the procedures, relevant literature, software, instrumentation and any quality control measurements taken. | Each method should be described in enough detail to allow other researchers to interpret and repeat the study, if required. |
+| `Project Identifier` | A unique identifier for the research project. This can be used to link multiple dataset/EML document instances that are associated in some way with the same project, e.g. a monitoring series. The nature of the association can be described in the project description. |  |
 
 ::::::::::::: keypoints
 
