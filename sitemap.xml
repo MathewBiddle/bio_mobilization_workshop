@@ -28,6 +28,9 @@
     <loc>https://ioos.github.io/bio_mobilization_workshop/404.html</loc>
   </url>
   <url>
+    <loc>https://ioos.github.io/bio_mobilization_workshop/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
     <loc>https://ioos.github.io/bio_mobilization_workshop/LICENSE.html</loc>
   </url>
   <url>
@@ -38,6 +41,12 @@
   </url>
   <url>
     <loc>https://ioos.github.io/bio_mobilization_workshop/aio.html</loc>
+  </url>
+  <url>
+    <loc>https://ioos.github.io/bio_mobilization_workshop/citation.html</loc>
+  </url>
+  <url>
+    <loc>https://ioos.github.io/bio_mobilization_workshop/controlled-vocab.html</loc>
   </url>
   <url>
     <loc>https://ioos.github.io/bio_mobilization_workshop/edna-extension.html</loc>
@@ -79,6 +88,9 @@
     <loc>https://ioos.github.io/bio_mobilization_workshop/instructor/404.html</loc>
   </url>
   <url>
+    <loc>https://ioos.github.io/bio_mobilization_workshop/instructor/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
     <loc>https://ioos.github.io/bio_mobilization_workshop/instructor/LICENSE.html</loc>
   </url>
   <url>
@@ -89,6 +101,12 @@
   </url>
   <url>
     <loc>https://ioos.github.io/bio_mobilization_workshop/instructor/aio.html</loc>
+  </url>
+  <url>
+    <loc>https://ioos.github.io/bio_mobilization_workshop/instructor/citation.html</loc>
+  </url>
+  <url>
+    <loc>https://ioos.github.io/bio_mobilization_workshop/instructor/controlled-vocab.html</loc>
   </url>
   <url>
     <loc>https://ioos.github.io/bio_mobilization_workshop/instructor/edna-extension.html</loc>

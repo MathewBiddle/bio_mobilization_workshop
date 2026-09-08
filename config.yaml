@@ -18,10 +18,10 @@ carpentry: 'incubator'
 carpentry_description: 'Marine data mobilization workshop for Biology and Ecosystem Essential Ocean Variables (Bio-Eco EOV) as a Contribution to the UN Decade on Ocean Science for Sustainable Development'
 
 # Overall title for pages.
-title: 'Marine Biological Data Mobilization Workshop 2024'
+title: 'Marine Biological Data Mobilization Workshop 2025'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
-created: 2024-04-19 # FIXME
+created: 2025-09-15 # FIXME
 
 # Comma-separated list of keywords for the lesson
 keywords: 'software, data, lesson, The Carpentries' # FIXME
@@ -82,6 +82,7 @@ learners:
 - helpful-tutorials.md
 - edna-extension.md
 - acoustic-telemetry.md
+- controlled-vocab.md
 
 # Information for Instructors
 instructors: 
@@ -93,5 +94,13 @@ profiles:
 #
 # This space below is where custom yaml items (e.g. pinning
 # sandpaper and varnish versions) should live
+analytics: |
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0TDKTSR1DN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-
+    gtag('config', 'G-0TDKTSR1DN');
+  </script>
